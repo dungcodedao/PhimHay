@@ -1,27 +1,27 @@
 *.iml
 .gradle
- /local.properties
- /.idea/
- .DS_Store
- /build
- /captures
- .externalNativeBuild
- .cxx
- local.properties
- 
- # AI & Agent metadata
- .agent/
- 
- # Logs and temporary build files
- *.log
- *log.txt
- *error.txt
- compile_*.log
- final_*.log
- 
- # Project Documentation (requested to remove from git)
- IMPLEMENTATION_PLAN.md
- ARCHITECTURE.md
- 
- # Other personal/binary files
- *.pdf
+/local.properties
+/.idea/
+.DS_Store
+/build/
+/captures/
+.externalNativeBuild
+.cxx
+local.properties
+
+# AI & Agent metadata
+.agent/
+
+# Logs and temporary build files
+*.log
+*log.txt
+*error.txt
+compile_*.log
+final_*.log
+
+# Project Documentation
+IMPLEMENTATION_PLAN.md
+ARCHITECTURE.md
+
+# Other personal/binary files
+*.pdf
