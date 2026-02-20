@@ -1,0 +1,992 @@
+﻿> Task :app:preBuild UP-TO-DATE
+> Task :app:preDebugBuild UP-TO-DATE
+> Task :app:mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :app:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :app:checkDebugAarMetadata UP-TO-DATE
+> Task :app:generateDebugResValues UP-TO-DATE
+> Task :app:mapDebugSourceSetPaths UP-TO-DATE
+> Task :app:generateDebugResources UP-TO-DATE
+> Task :app:mergeDebugResources UP-TO-DATE
+> Task :app:packageDebugResources UP-TO-DATE
+> Task :app:parseDebugLocalResources UP-TO-DATE
+> Task :app:createDebugCompatibleScreenManifests UP-TO-DATE
+> Task :app:extractDeepLinksDebug UP-TO-DATE
+> Task :app:processDebugMainManifest UP-TO-DATE
+> Task :app:processDebugManifest UP-TO-DATE
+> Task :app:processDebugManifestForPackage UP-TO-DATE
+> Task :app:processDebugResources UP-TO-DATE
+> Task :app:javaPreCompileDebug UP-TO-DATE
+> Task :app:mergeDebugShaders UP-TO-DATE
+> Task :app:compileDebugShaders NO-SOURCE
+> Task :app:generateDebugAssets UP-TO-DATE
+> Task :app:mergeDebugAssets UP-TO-DATE
+> Task :app:compressDebugAssets UP-TO-DATE
+> Task :app:desugarDebugFileDependencies UP-TO-DATE
+> Task :app:checkDebugDuplicateClasses UP-TO-DATE
+> Task :app:mergeExtDexDebug UP-TO-DATE
+> Task :app:mergeLibDexDebug UP-TO-DATE
+> Task :app:mergeDebugJniLibFolders UP-TO-DATE
+> Task :app:mergeDebugNativeLibs UP-TO-DATE
+> Task :app:stripDebugDebugSymbols UP-TO-DATE
+> Task :app:validateSigningDebug UP-TO-DATE
+> Task :app:writeDebugAppMetadata UP-TO-DATE
+> Task :app:writeDebugSigningConfigVersions UP-TO-DATE
+> Task :app:kspDebugKotlin
+
+> Task :app:compileDebugKotlin FAILED
+./gradlew : e: file:///D:/Androi/MusicApp/app/
+src/main/java/com/example/movieapp/data/reposi
+tory/AuthRepositorySupabaseImpl.kt:4:36 
+Unresolved reference 'util'.
+At line:1 char:21
++ rm final_error.log; ./gradlew assembleDebug 
+> final_error.log 2>&1
++                     
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ( 
+   e: file:///D:/A...ference 'util'.:String)  
+   [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandEr 
+   ror
+ 
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/AuthRep
+ositorySupabaseImpl.kt:33:58 Return type of 
+'login' is not a subtype of the return type 
+of the overridden member 'fun login(email: 
+String, password: String): Flow<ERROR CLASS: 
+Symbol not found for Resource>' defined in 'co
+m/example/movieapp/domain/repository/IAuthRepo
+sitory'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/AuthRep
+ositorySupabaseImpl.kt:33:63 Unresolved 
+reference 'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/AuthRep
+ositorySupabaseImpl.kt:33:81 Cannot infer 
+type for this parameter. Please specify it 
+explicitly.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/AuthRep
+ositorySupabaseImpl.kt:33:81 Not enough 
+information to infer type argument for 'T'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/AuthRep
+ositorySupabaseImpl.kt:34:14 Unresolved 
+reference 'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/AuthRep
+ositorySupabaseImpl.kt:40:18 Unresolved 
+reference 'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/AuthRep
+ositorySupabaseImpl.kt:42:18 Unresolved 
+reference 'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/AuthRep
+ositorySupabaseImpl.kt:46:61 Return type of 
+'register' is not a subtype of the return 
+type of the overridden member 'fun 
+register(email: String, password: String): 
+Flow<ERROR CLASS: Symbol not found for 
+Resource>' defined in 'com/example/movieapp/do
+main/repository/IAuthRepository'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/AuthRep
+ositorySupabaseImpl.kt:46:66 Unresolved 
+reference 'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/AuthRep
+ositorySupabaseImpl.kt:46:84 Cannot infer 
+type for this parameter. Please specify it 
+explicitly.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/AuthRep
+ositorySupabaseImpl.kt:46:84 Not enough 
+information to infer type argument for 'T'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/AuthRep
+ositorySupabaseImpl.kt:47:14 Unresolved 
+reference 'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/AuthRep
+ositorySupabaseImpl.kt:53:18 Unresolved 
+reference 'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/AuthRep
+ositorySupabaseImpl.kt:55:18 Unresolved 
+reference 'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/Favorit
+eRepositorySupabaseImpl.kt:10:36 Unresolved 
+reference 'util'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/Favorit
+eRepositorySupabaseImpl.kt:70:43 Return type 
+of 'syncFromCloud' is not a subtype of the 
+return type of the overridden member 'suspend 
+fun syncFromCloud(): Flow<ERROR CLASS: Symbol 
+not found for Resource>' defined in 'com/examp
+le/movieapp/domain/repository/IFavoriteReposit
+ory'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/Favorit
+eRepositorySupabaseImpl.kt:70:48 Unresolved 
+reference 'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/Favorit
+eRepositorySupabaseImpl.kt:70:66 Cannot infer 
+type for this parameter. Please specify it 
+explicitly.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/Favorit
+eRepositorySupabaseImpl.kt:70:66 Not enough 
+information to infer type argument for 'T'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/Favorit
+eRepositorySupabaseImpl.kt:72:14 Unresolved 
+reference 'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/Favorit
+eRepositorySupabaseImpl.kt:82:18 Unresolved 
+reference 'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/Favorit
+eRepositorySupabaseImpl.kt:84:18 Unresolved 
+reference 'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/MovieRe
+positoryImpl.kt:14:36 Unresolved reference 
+'util'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/MovieRe
+positoryImpl.kt:32:39 Return type of 
+'getTrendingMovies' is not a subtype of the 
+return type of the overridden member 'fun 
+getTrendingMovies(): Flow<ERROR CLASS: Symbol 
+not found for Resource>' defined in 'com/examp
+le/movieapp/domain/repository/IMovieRepository
+'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/MovieRe
+positoryImpl.kt:32:44 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/MovieRe
+positoryImpl.kt:32:69 Cannot infer type for 
+this parameter. Please specify it explicitly.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/MovieRe
+positoryImpl.kt:32:69 Not enough information 
+to infer type argument for 'T'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/MovieRe
+positoryImpl.kt:33:14 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/MovieRe
+positoryImpl.kt:36:18 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/MovieRe
+positoryImpl.kt:44:18 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/MovieRe
+positoryImpl.kt:47:22 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/MovieRe
+positoryImpl.kt:52:47 Return type of 
+'getPopularMovies' is not a subtype of the 
+return type of the overridden member 'fun 
+getPopularMovies(page: Int = ...): Flow<ERROR 
+CLASS: Symbol not found for Resource>' 
+defined in 'com/example/movieapp/domain/reposi
+tory/IMovieRepository'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/MovieRe
+positoryImpl.kt:52:52 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/MovieRe
+positoryImpl.kt:52:77 Cannot infer type for 
+this parameter. Please specify it explicitly.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/MovieRe
+positoryImpl.kt:52:77 Not enough information 
+to infer type argument for 'T'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/MovieRe
+positoryImpl.kt:53:14 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/MovieRe
+positoryImpl.kt:56:18 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/MovieRe
+positoryImpl.kt:64:18 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/MovieRe
+positoryImpl.kt:67:22 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/MovieRe
+positoryImpl.kt:72:48 Return type of 
+'getMovieDetail' is not a subtype of the 
+return type of the overridden member 'fun 
+getMovieDetail(movieId: Int): Flow<ERROR 
+CLASS: Symbol not found for Resource>' 
+defined in 'com/example/movieapp/domain/reposi
+tory/IMovieRepository'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/MovieRe
+positoryImpl.kt:72:53 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/MovieRe
+positoryImpl.kt:72:78 Cannot infer type for 
+this parameter. Please specify it explicitly.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/MovieRe
+positoryImpl.kt:72:78 Not enough information 
+to infer type argument for 'T'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/MovieRe
+positoryImpl.kt:73:14 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/MovieRe
+positoryImpl.kt:76:18 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/MovieRe
+positoryImpl.kt:78:18 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/MovieRe
+positoryImpl.kt:82:48 Return type of 
+'getMovieVideos' is not a subtype of the 
+return type of the overridden member 'fun 
+getMovieVideos(movieId: Int): Flow<ERROR 
+CLASS: Symbol not found for Resource>' 
+defined in 'com/example/movieapp/domain/reposi
+tory/IMovieRepository'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/MovieRe
+positoryImpl.kt:82:53 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/MovieRe
+positoryImpl.kt:82:83 Cannot infer type for 
+this parameter. Please specify it explicitly.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/MovieRe
+positoryImpl.kt:82:83 Not enough information 
+to infer type argument for 'T'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/MovieRe
+positoryImpl.kt:83:14 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/MovieRe
+positoryImpl.kt:89:18 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/MovieRe
+positoryImpl.kt:91:18 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/MovieRe
+positoryImpl.kt:95:49 Return type of 
+'getMovieCredits' is not a subtype of the 
+return type of the overridden member 'fun 
+getMovieCredits(movieId: Int): Flow<ERROR 
+CLASS: Symbol not found for Resource>' 
+defined in 'com/example/movieapp/domain/reposi
+tory/IMovieRepository'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/MovieRe
+positoryImpl.kt:95:54 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/MovieRe
+positoryImpl.kt:95:78 Cannot infer type for 
+this parameter. Please specify it explicitly.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/MovieRe
+positoryImpl.kt:95:78 Not enough information 
+to infer type argument for 'T'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/MovieRe
+positoryImpl.kt:96:14 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/MovieRe
+positoryImpl.kt:99:18 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/MovieRe
+positoryImpl.kt:101:18 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/MovieRe
+positoryImpl.kt:105:50 Return type of 
+'getSimilarMovies' is not a subtype of the 
+return type of the overridden member 'fun 
+getSimilarMovies(movieId: Int): Flow<ERROR 
+CLASS: Symbol not found for Resource>' 
+defined in 'com/example/movieapp/domain/reposi
+tory/IMovieRepository'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/MovieRe
+positoryImpl.kt:105:55 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/MovieRe
+positoryImpl.kt:105:80 Cannot infer type for 
+this parameter. Please specify it explicitly.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/MovieRe
+positoryImpl.kt:105:80 Not enough information 
+to infer type argument for 'T'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/MovieRe
+positoryImpl.kt:106:14 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/MovieRe
+positoryImpl.kt:109:18 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/MovieRe
+positoryImpl.kt:111:18 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/MovieRe
+positoryImpl.kt:115:58 Return type of 
+'searchMovies' is not a subtype of the return 
+type of the overridden member 'fun 
+searchMovies(query: String, page: Int = ...): 
+Flow<ERROR CLASS: Symbol not found for 
+Resource>' defined in 'com/example/movieapp/do
+main/repository/IMovieRepository'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/MovieRe
+positoryImpl.kt:115:63 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/MovieRe
+positoryImpl.kt:115:88 Cannot infer type for 
+this parameter. Please specify it explicitly.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/MovieRe
+positoryImpl.kt:115:88 Not enough information 
+to infer type argument for 'T'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/MovieRe
+positoryImpl.kt:116:14 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/MovieRe
+positoryImpl.kt:119:18 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/MovieRe
+positoryImpl.kt:121:18 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/MovieRe
+positoryImpl.kt:125:36 Return type of 
+'getMovieGenres' is not a subtype of the 
+return type of the overridden member 'fun 
+getMovieGenres(): Flow<ERROR CLASS: Symbol 
+not found for Resource>' defined in 'com/examp
+le/movieapp/domain/repository/IMovieRepository
+'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/MovieRe
+positoryImpl.kt:125:41 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/MovieRe
+positoryImpl.kt:125:66 Cannot infer type for 
+this parameter. Please specify it explicitly.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/MovieRe
+positoryImpl.kt:125:66 Not enough information 
+to infer type argument for 'T'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/MovieRe
+positoryImpl.kt:126:14 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/MovieRe
+positoryImpl.kt:129:18 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/MovieRe
+positoryImpl.kt:131:18 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/MovieRe
+positoryImpl.kt:135:61 Return type of 
+'getMoviesByGenre' is not a subtype of the 
+return type of the overridden member 'fun 
+getMoviesByGenre(genreId: Int, page: Int = 
+...): Flow<ERROR CLASS: Symbol not found for 
+Resource>' defined in 'com/example/movieapp/do
+main/repository/IMovieRepository'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/MovieRe
+positoryImpl.kt:135:66 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/MovieRe
+positoryImpl.kt:135:91 Cannot infer type for 
+this parameter. Please specify it explicitly.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/MovieRe
+positoryImpl.kt:135:91 Not enough information 
+to infer type argument for 'T'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/MovieRe
+positoryImpl.kt:136:14 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/MovieRe
+positoryImpl.kt:139:18 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/MovieRe
+positoryImpl.kt:141:18 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/MovieRe
+positoryImpl.kt:167:48 Return type of 
+'getActorDetail' is not a subtype of the 
+return type of the overridden member 'fun 
+getActorDetail(actorId: Int): Flow<ERROR 
+CLASS: Symbol not found for Resource>' 
+defined in 'com/example/movieapp/domain/reposi
+tory/IMovieRepository'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/MovieRe
+positoryImpl.kt:167:53 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/MovieRe
+positoryImpl.kt:167:78 Cannot infer type for 
+this parameter. Please specify it explicitly.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/MovieRe
+positoryImpl.kt:167:78 Not enough information 
+to infer type argument for 'T'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/MovieRe
+positoryImpl.kt:168:14 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/MovieRe
+positoryImpl.kt:172:18 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/data/repository/MovieRe
+positoryImpl.kt:174:18 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/domain/repository/IAuth
+Repository.kt:3:36 Unresolved reference 
+'util'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/domain/repository/IAuth
+Repository.kt:13:54 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/domain/repository/IAuth
+Repository.kt:14:57 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/domain/repository/IFavo
+riteRepository.kt:5:36 Unresolved reference 
+'util'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/domain/repository/IFavo
+riteRepository.kt:15:39 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/domain/repository/IMovi
+eRepository.kt:4:36 Unresolved reference 
+'util'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/domain/repository/IMovi
+eRepository.kt:15:35 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/domain/repository/IMovi
+eRepository.kt:16:47 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/domain/repository/IMovi
+eRepository.kt:17:32 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/domain/repository/IMovi
+eRepository.kt:20:44 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/domain/repository/IMovi
+eRepository.kt:21:44 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/domain/repository/IMovi
+eRepository.kt:22:45 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/domain/repository/IMovi
+eRepository.kt:23:46 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/domain/repository/IMovi
+eRepository.kt:26:58 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/domain/repository/IMovi
+eRepository.kt:27:61 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/domain/repository/IMovi
+eRepository.kt:35:44 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/domain/usecase/GetHomeM
+oviesUseCase.kt:6:36 Unresolved reference 
+'util'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/domain/usecase/GetHomeM
+oviesUseCase.kt:16:29 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/domain/usecase/GetHomeM
+oviesUseCase.kt:18:28 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/domain/usecase/GetHomeM
+oviesUseCase.kt:20:40 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/domain/usecase/GetMovie
+DetailUseCase.kt:5:36 Unresolved reference 
+'util'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/domain/usecase/GetMovie
+DetailUseCase.kt:16:39 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/domain/usecase/GetMovie
+DetailUseCase.kt:18:39 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/domain/usecase/GetMovie
+DetailUseCase.kt:20:37 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/domain/usecase/GetMovie
+DetailUseCase.kt:22:40 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/domain/usecase/ManageFa
+voriteUseCase.kt:6:36 Unresolved reference 
+'util'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/domain/usecase/ManageFa
+voriteUseCase.kt:22:39 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/domain/usecase/SearchMo
+viesUseCase.kt:6:36 Unresolved reference 
+'util'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/domain/usecase/SearchMo
+viesUseCase.kt:16:61 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/navigation
+/AppNavigation.kt:64:13 Unresolved reference 
+'VideoPlayerScreen'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/navigation
+/AppNavigation.kt:110:13 Unresolved reference 
+'RegisterScreen'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/pages/Main
+Screen.kt:30:29 Unresolved reference 
+'FavoriteRoute'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/pages/Main
+Screen.kt:31:29 Unresolved reference 
+'HomeRoute'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/pages/Main
+Screen.kt:32:29 Unresolved reference 
+'ProfileRoute'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/pages/Main
+Screen.kt:33:29 Unresolved reference 
+'SearchRoute'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/pages/Main
+Screen.kt:53:36 Unresolved reference 
+'HomeRoute'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/pages/Main
+Screen.kt:54:35 Unresolved reference 
+'SearchRoute'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/pages/Main
+Screen.kt:55:36 Unresolved reference 
+'FavoriteRoute'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/pages/Main
+Screen.kt:56:34 Unresolved reference 
+'ProfileRoute'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/pages/Main
+Screen.kt:104:32 Unresolved reference 
+'HomeRoute'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/pages/Main
+Screen.kt:110:11 Unresolved reference 
+'composable'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/pages/Main
+Screen.kt:111:13 Unresolved reference 
+'composable'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/pages/Main
+Screen.kt:111:24 Unresolved reference 
+'HomeRoute'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/pages/Main
+Screen.kt:112:17 @Composable invocations can 
+only happen from the context of a @Composable 
+function
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/pages/Main
+Screen.kt:117:13 Unresolved reference 
+'composable'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/pages/Main
+Screen.kt:117:24 Unresolved reference 
+'SearchRoute'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/pages/Main
+Screen.kt:118:17 @Composable invocations can 
+only happen from the context of a @Composable 
+function
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/pages/Main
+Screen.kt:123:13 Unresolved reference 
+'composable'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/pages/Main
+Screen.kt:123:24 Unresolved reference 
+'FavoriteRoute'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/pages/Main
+Screen.kt:124:17 @Composable invocations can 
+only happen from the context of a @Composable 
+function
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/pages/Main
+Screen.kt:129:13 Unresolved reference 
+'composable'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/pages/Main
+Screen.kt:129:24 Unresolved reference 
+'ProfileRoute'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/pages/Main
+Screen.kt:130:17 @Composable invocations can 
+only happen from the context of a @Composable 
+function
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/pages/Main
+Screen.kt:134:48 Unresolved reference 
+'FavoriteRoute'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/pages/Sear
+chScreen.kt:45:40 Unresolved reference 
+'textFieldColors'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/viewmodel/
+ActorViewModel.kt:9:36 Unresolved reference 
+'util'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/viewmodel/
+ActorViewModel.kt:34:34 None of the following 
+candidates is applicable:
+fun <reified T> NavBackStackEntry.toRoute(): T
+fun <reified T : Any> 
+SavedStateHandle.toRoute(typeMap: Map<KType, 
+@JvmSuppressWildcards() NavType<*>> = ...): T
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/viewmodel/
+ActorViewModel.kt:34:63 Unresolved reference 
+'ActorRoute'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/viewmodel/
+ActorViewModel.kt:35:29 Unresolved reference 
+'actorId'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/viewmodel/
+ActorViewModel.kt:44:53 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/viewmodel/
+ActorViewModel.kt:46:24 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/viewmodel/
+ActorViewModel.kt:47:24 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/viewmodel/
+ActorViewModel.kt:47:85 Unresolved reference 
+'data'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/viewmodel/
+ActorViewModel.kt:48:24 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/viewmodel/
+ActorViewModel.kt:48:83 Unresolved reference 
+'message'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/viewmodel/
+AuthViewModel.kt:6:36 Unresolved reference 
+'util'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/viewmodel/
+AuthViewModel.kt:43:61 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/viewmodel/
+AuthViewModel.kt:51:64 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/viewmodel/
+AuthViewModel.kt:57:42 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/viewmodel/
+AuthViewModel.kt:59:16 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/viewmodel/
+AuthViewModel.kt:60:16 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/viewmodel/
+AuthViewModel.kt:61:16 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/viewmodel/
+AuthViewModel.kt:61:94 Unresolved reference 
+'message'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/viewmodel/
+DetailViewModel.kt:11:36 Unresolved reference 
+'util'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/viewmodel/
+DetailViewModel.kt:42:34 None of the 
+following candidates is applicable:
+fun <reified T> NavBackStackEntry.toRoute(): T
+fun <reified T : Any> 
+SavedStateHandle.toRoute(typeMap: Map<KType, 
+@JvmSuppressWildcards() NavType<*>> = ...): T
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/viewmodel/
+DetailViewModel.kt:42:63 Unresolved reference 
+'DetailRoute'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/viewmodel/
+DetailViewModel.kt:43:29 Unresolved reference 
+'movieId'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/viewmodel/
+DetailViewModel.kt:57:63 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/viewmodel/
+DetailViewModel.kt:59:28 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/viewmodel/
+DetailViewModel.kt:60:76 Unresolved reference 
+'data'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/viewmodel/
+DetailViewModel.kt:62:65 Unresolved reference 
+'data'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/viewmodel/
+DetailViewModel.kt:64:28 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/viewmodel/
+DetailViewModel.kt:65:70 Unresolved reference 
+'message'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/viewmodel/
+DetailViewModel.kt:67:25 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/viewmodel/
+DetailViewModel.kt:74:63 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/viewmodel/
+DetailViewModel.kt:75:35 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/viewmodel/
+DetailViewModel.kt:76:67 Unresolved reference 
+'data'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/viewmodel/
+DetailViewModel.kt:83:61 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/viewmodel/
+DetailViewModel.kt:84:35 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/viewmodel/
+DetailViewModel.kt:85:65 Unresolved reference 
+'data'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/viewmodel/
+DetailViewModel.kt:92:64 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/viewmodel/
+DetailViewModel.kt:93:35 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/viewmodel/
+DetailViewModel.kt:94:74 Unresolved reference 
+'data'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/viewmodel/
+FavoriteViewModel.kt:7:36 Unresolved 
+reference 'util'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/viewmodel/
+FavoriteViewModel.kt:42:61 Unresolved 
+reference 'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/viewmodel/
+FavoriteViewModel.kt:44:24 Unresolved 
+reference 'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/viewmodel/
+FavoriteViewModel.kt:45:24 Unresolved 
+reference 'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/viewmodel/
+FavoriteViewModel.kt:46:24 Unresolved 
+reference 'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/viewmodel/
+FavoriteViewModel.kt:46:102 Unresolved 
+reference 'message'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/viewmodel/
+HomeViewModel.kt:11:36 Unresolved reference 
+'util'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/viewmodel/
+HomeViewModel.kt:54:56 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/viewmodel/
+HomeViewModel.kt:55:31 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/viewmodel/
+HomeViewModel.kt:56:63 Unresolved reference 
+'data'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/viewmodel/
+HomeViewModel.kt:68:62 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/viewmodel/
+HomeViewModel.kt:70:28 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/viewmodel/
+HomeViewModel.kt:71:79 Unresolved reference 
+'data'.
+29 actionable tasks: 2 executed, 27 up-to-date
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/viewmodel/
+HomeViewModel.kt:73:28 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/viewmodel/
+HomeViewModel.kt:74:70 Unresolved reference 
+'message'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/viewmodel/
+HomeViewModel.kt:76:25 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/viewmodel/
+HomeViewModel.kt:83:61 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/viewmodel/
+HomeViewModel.kt:84:35 Unresolved reference 
+'Resource'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/viewmodel/
+HomeViewModel.kt:85:64 Argument type 
+mismatch: actual type is 
+'kotlinx.coroutines.flow.Flow<T>', but 'kotlin
+.collections.List<com.example.movieapp.domain.
+model.Movie>' was expected.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/viewmodel/
+HomeViewModel.kt:85:71 Unresolved reference 
+'data'.
+e: file:///D:/Androi/MusicApp/app/src/main/jav
+a/com/example/movieapp/presentation/viewmodel/
+HomeViewModel.kt:85:76 Cannot infer type for 
+this parameter. Please specify it explicitly.
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task 
+':app:compileDebugKotlin'.
+> A failure occurred while executing org.jetbr
+ains.kotlin.compilerRunner.GradleCompilerRunne
+rWithWorkers$GradleKotlinCompilerWorkAction
+   > Compilation error. See log for more 
+details
+
+* Try:
+> Run with --stacktrace option to get the 
+stack trace.
+> Run with --info or --debug option to get 
+more log output.
+> Run with --scan to get full insights.
+> Get more help at https://help.gradle.org.
+
+BUILD FAILED in 15s

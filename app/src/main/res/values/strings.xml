@@ -1,0 +1,56 @@
+<resources>
+    <string name="app_name">PhimHay</string>
+    
+    <!-- Navigation -->
+    <string name="nav_home">Trang chủ</string>
+    <string name="nav_search">Tìm kiếm</string>
+    <string name="nav_favorite">Yêu thích</string>
+    <string name="nav_profile">Cá nhân</string>
+    <string name="nav_history">Lịch sử</string>
+    
+    <!-- Detail -->
+    <string name="watch_now">Xem Phim ngay</string>
+    <string name="trailer">Trailer</string>
+    <string name="overview_title">Nội dung</string>
+    <string name="cast_title">Diễn viên</string>
+    <string name="similar_movies">Phim tương tự</string>
+    <string name="runtime_min">%1$d phút</string>
+    
+    <!-- Auth -->
+    <string name="login_title">Chào mừng trở lại</string>
+    <string name="login_subtitle">Đăng nhập để đồng bộ danh sách phim của bạn</string>
+    <string name="email_label">Email</string>
+    <string name="password_label">Mật khẩu</string>
+    <string name="login_button">Đăng nhập</string>
+    <string name="no_account">Chưa có tài khoản? Đăng ký ngay</string>
+    <string name="register_title">Tạo tài khoản</string>
+    <string name="register_subtitle">Tham gia cộng đồng yêu điện ảnh</string>
+    <string name="username_label">Tên người dùng</string>
+    <string name="register_button">Đăng ký</string>
+    <string name="already_have_account">Đã có tài khoản? Đăng nhập</string>
+    
+    <!-- Profile -->
+    <string name="edit_profile">Chỉnh sửa hồ sơ</string>
+    <string name="logout">Đăng xuất</string>
+    <string name="joined_date">Tham gia: %1$s</string>
+    
+    <!-- Common -->
+    <string name="search_placeholder">Tìm kiếm phim, diễn viên...</string>
+    <string name="retry">Thử lại</string>
+    <string name="error_generic">Đã có lỗi xảy ra</string>
+    <string name="no_favorites">Chưa có phim yêu thích nào</string>
+    <string name="no_history">Lịch sử xem trống</string>
+    <string name="no_internet">Không có kết nối Internet</string>
+    
+    <!-- Share -->
+    <string name="share_title">Chia sẻ phim</string>
+    <string name="share_message">Xem phim \"%1$s\" cực hay tại MovieApp: movieapp://movie/%2$d</string>
+
+    <!-- Rating -->
+    <string name="rating_title">Đánh giá từ người dùng</string>
+    <string name="no_ratings">Chưa có đánh giá nào. Hãy là người đầu tiên!</string>
+    <string name="write_review">Viết đánh giá của bạn...</string>
+    <string name="submit_rating">Gửi đánh giá</string>
+    <string name="rating_success">Đã gửi đánh giá thành công</string>
+    <string name="review_count">(%1$d đánh giá)</string>
+</resources>
