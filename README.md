@@ -1,68 +1,78 @@
-# 🎬 MovieApp - Ứng dụng Khám phá Phim Hiện đại
+# 🎬 MovieApp - PhimHay 
+### *Ứng dụng Khám phá Phim Hiện đại & Trải nghiệm Điện ảnh Đỉnh cao*
 
-[![Android](https://img.shields.io/badge/Platform-Android-green.svg)](https://www.android.com)
-[![Kotlin](https://img.shields.io/badge/Language-Kotlin-orange.svg)](https://kotlinlang.org)
-[![Compose](https://img.shields.io/badge/UI-Jetpack%20Compose-blue.svg)](https://developer.android.com/jetpack/compose)
-[![Clean Architecture](https://img.shields.io/badge/Architecture-Clean%20Architecture-lightgrey.svg)](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
+[![Android](https://img.shields.io/badge/Platform-Android-3DDC84?style=for-the-badge&logo=android&logoColor=white)](https://www.android.com)
+[![Kotlin](https://img.shields.io/badge/Language-Kotlin-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white)](https://kotlinlang.org)
+[![Compose](https://img.shields.io/badge/UI-Jetpack%20Compose-4285F4?style=for-the-badge&logo=jetpackcompose&logoColor=white)](https://developer.android.com/jetpack/compose)
+[![Clean Architecture](https://img.shields.io/badge/Architecture-Clean-FF4081?style=for-the-badge)](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
 
-**MovieApp** là một ứng dụng Android mẫu mạnh mẽ, được xây dựng với các công nghệ hiện đại nhất để thể hiện kỹ năng phát triển ứng dụng di động chuẩn Production-ready. Ứng dụng tập trung vào trải nghiệm người dùng mượt mà, hỗ trợ tiếng Việt và tích hợp đồng bộ dữ liệu đám mây.
-
----
-
-## ✨ Tính năng nổi bật
-
-- 🏠 **Khám phá phim:** Cập nhật các phim đang thịnh hành (Trending), phim phổ biến và lọc theo thể loại.
-- 🔍 **Tìm kiếm thông minh:** Tìm kiếm phim thời gian thực với cơ chế Debounce và Paging 3 (Tải trang vô tận).
-- 📱 **Chi tiết phim cao cấp:**
-  - Xem thông tin chi tiết, dàn diễn viên.
-  - Xem trailer trực tiếp với trình phát **Media3/ExoPlayer**.
-  - **Dynamic Theming:** Giao diện tự động đổi màu theo poster phim.
-  - **Shared Element Transition:** Hiệu ứng chuyển cảnh "ảnh bay" nghệ thuật.
-- ❤️ **Yêu thích & Lịch sử:** Lưu trữ phim yêu thích và lịch sử xem đồng bộ giữa local (Room) và cloud (Supabase).
-- ⭐ **Đánh giá & Nhận xét:** Hệ thống review phim thời gian thực tích hợp với cộng đồng người dùng.
-- 🌐 **Offline First:** Hỗ trợ lưu cache dữ liệu để xem phim ngay cả khi không có mạng.
-- 🔗 **Deep Linking:** Mở trực tiếp trang chi tiết phim từ link bên ngoài.
+**PhimHay (MovieApp)** là một dự án Android cao cấp, được xây dựng để thể hiện kỹ năng phát triển ứng dụng chuẩn **Production-Ready**. Ứng dụng không chỉ có giao diện Dark Cinematic sang trọng mà còn sở hữu kiến trúc bên dưới cực kỳ vững chắc, đáp ứng các tiêu chuẩn khắt khe nhất của các công ty công nghệ lớn.
 
 ---
 
-## 🛠 Tech Stack (Công cụ sử dụng)
+## 🚀 Tính năng vượt trội
 
-- **Ngôn ngữ:** Kotlin 100%.
-- **Giao diện:** Jetpack Compose (Material 3).
-- **Kiến trúc:** Clean Architecture + MVVM + UseCases.
-- **Dependency Injection:** Dagger Hilt.
-- **Networking:** Retrofit & OkHttp (Kotlinx Serialization).
-- **Cơ sở dữ liệu:** 
-  - **Room:** Lưu trữ cache và dữ liệu offline.
-  - **Supabase:** Quản lý Auth (Đăng nhập) và Cloud Sync (Real-time DB).
-- **Xử lý ảnh:** Coil.
-- **Animation:** Lottie & Compose Animations.
-- **Phản hồi người dùng:** Palette API (Dynamic colors).
+- 🎬 **Trải nghiệm Cinematic:** Giao diện tối (Dark Mode) huyền bí, tập trung tối đa vào hình ảnh phim.
+- 🔍 **Tìm kiếm mạnh mẽ:** Tìm kiếm thời gian thực với **Paging 3** (Load tới đâu tải tới đó) và cơ chế xử lý tránh lag (Debounce).
+- 🎞️ **Trình phát Video Media3:** Xem Trailer phim mượt mà ngay trong app với **ExoPlayer**.
+- 🎨 **Dynamic UI:** Tự động trích xuất màu từ poster phim để thay đổi theme trang chi tiết (sử dụng Palette API).
+- 🔐 **Xác thực Bảo mật:** Hệ thống Đăng nhập/Đăng ký tích hợp **Supabase Auth**.
+- 💾 **Offline First:** Lưu trữ lịch sử và yêu thích qua **Room Database**, cho phép xem offline bất cứ lúc nào.
+- ✨ **Animation đỉnh cao:** Hiệu ứng chuyển động mượt mà với **Shared Element Transitions** và **Lottie Animations**.
 
 ---
 
-## 📐 Kiến trúc dự án (Architecture)
+## 🛠 Tech Stack (Công nghệ cốt lõi)
 
-Dự án tuân thủ nghiêm ngặt **Clean Architecture** với 3 lớp tách biệt:
-
-1.  **Data Layer:** Chịu trách nhiệm truy xuất dữ liệu từ API (TMDb) và Local DB (Room).
-2.  **Domain Layer:** Chứa Business Logic (UseCases) và Repository Interfaces. Đây là lớp trung tâm, độc lập với các thư viện bên ngoài.
-3.  **Presentation Layer:** Sử dụng Jetpack Compose và ViewModel để quản lý State và hiển thị UI.
-
----
-
-## 🚀 Cài đặt & Chạy ứng dụng
-
-1.  Clone dự án về máy.
-2.  Cung cấp **TMDb API Key** và **Supabase URL/API Key** trong file `AppUtil.kt` (hoặc cấu hình buildConfig).
-3.  Build và chạy trên thiết bị Android (Min SDK 26).
+| Mảng | Công nghệ sử dụng |
+| :--- | :--- |
+| **Giao diện** | **Jetpack Compose**, Material 3, Lottie, Coil (Image Loading) |
+| **Logic/Xử lý** | **Kotlin Coroutines**, Flow, UseCases |
+| **Quản lý dữ liệu** | **Retrofit**, OkHttp, Kotlinx Serialization |
+| **Bên thứ 3** | **Supabase** (Auth & Real-time DB), TMDb API |
+| **Lưu trữ** | **Room Persistence**, DataStore |
+| **Dependency Injection** | **Dagger Hilt** |
 
 ---
 
-## 📸 Ảnh chụp màn hình (Mockup)
+## 📐 Kiến trúc (Architecture)
 
-*(Sẽ được bổ sung sau khi chụp ảnh Portfolio)*
+Dự án áp dụng mô hình **Clean Architecture** kết hợp với **MVVM**, đảm bảo code Dễ đọc - Dễ test - Dễ bảo trì:
+
+1.  **Presentation (UI/ViewModel):** Xử lý UI State và nhận sự kiện từ người dùng.
+2.  **Domain (Business Logic):** Chứa các UseCase độc lập, thuần Kotlin, không phụ thuộc Framework.
+3.  **Data (Infrastructure):** Nơi giao tiếp với API và Database (Repository Pattern).
 
 ---
 
-*Dự án được thực hiện nhằm mục đích trình diễn kỹ năng Android chuyên sâu.*
+## 📸 Hình ảnh minh họa
+
+| Splash & Home | Chi tiết Phim | Tìm kiếm |
+| :---: | :---: | :---: |
+| *(Chèn ảnh 1)* | *(Chèn ảnh 2)* | *(Chèn ảnh 3)* |
+
+---
+
+## 🛠 Hướng dẫn cài đặt
+
+1. **Clone project:**
+   ```bash
+   git clone https://github.com/dungcodedao/PhimHay.git
+   ```
+2. **Cấu hình API:**
+   - Đăng ký API Key tại [TMDb](https://www.themoviedb.org/).
+   - Tạo Project tại [Supabase](https://supabase.com/).
+   - Cập nhật thông tin vào file cấu hình `local.properties` hoặc biến môi trường.
+3. **Build & Run:** Mở dự án bằng **Android Studio Ladybug** (hoặc mới hơn) và nhấn Run.
+
+---
+
+## 📮 Liên hệ
+
+Dự án được phát triển bởi **Ngô Văn Dũng**
+- 📧 Email: [Địa chỉ email của bạn]
+- 💼 LinkedIn: [Link LinkedIn của bạn]
+- 📁 Portfolio: [Link Portfolio nếu có]
+
+---
+*Nếu bạn thấy dự án này thú vị, đừng quên tặng mình 1 ⭐ nhé!*
