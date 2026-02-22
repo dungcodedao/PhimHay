@@ -4,6 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 /**
  * Room Entities - Đại diện cho cấu trúc bảng trong cơ sở dữ liệu local (SQLite).
@@ -41,7 +42,7 @@ data class FavoriteMovieEntity(
     val releaseDate: String = "",
     @SerialName("user_id")
     val userId: String,
-    @SerialName("added_at")
+    @Transient // Không gửi lên Supabase vì bảng favorites có thể chưa có cột này
     val addedAt: Long = System.currentTimeMillis()
 )
 

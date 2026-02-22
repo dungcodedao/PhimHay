@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <style name="Theme.MusicApp" parent="android:Theme.Material.Light.NoActionBar" />
+    <!-- Base application theme. -->
+    <style name="Theme.MovieApp" parent="android:Theme.Material.Light.NoActionBar">
+        <!-- Làm cho màn hình Splash mặc định của Android 12+ trùng màu với app -->
+        <item name="android:windowSplashScreenBackground">#030114</item> <!-- Màu tối của app -->
+        <item name="android:windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
+        
+        <!-- Các cấu hình khác -->
+        <item name="android:statusBarColor">#030114</item>
+        <item name="android:navigationBarColor">#030114</item>
+    </style>
 </resources>

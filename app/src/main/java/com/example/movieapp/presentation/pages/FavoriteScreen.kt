@@ -7,11 +7,11 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.movieapp.presentation.components.EmptyState
 import com.example.movieapp.presentation.components.MovieGridCard
 import com.example.movieapp.presentation.components.ShimmerGrid
 import com.example.movieapp.presentation.viewmodel.FavoriteViewModel
@@ -23,7 +23,7 @@ fun FavoriteScreen(
 ) {
     val uiState by viewModel.uiState.collectAsState()
 
-    Column(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
+    Column(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background).statusBarsPadding()) {
         Text(
             "Phim yêu thích",
             style = MaterialTheme.typography.headlineMedium,
@@ -34,9 +34,10 @@ fun FavoriteScreen(
         if (uiState.isLoading) {
             ShimmerGrid()
         } else if (uiState.favorites.isEmpty()) {
-            Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                Text("Chưa có phim yêu thích nào", color = MaterialTheme.colorScheme.onSurfaceVariant)
-            }
+            EmptyState(
+                title = "Chưa có phim yêu thích",
+                subtitle = "Nhấn vào biểu tượng ❤️ trên màn hình phim để thêm vào đây nhé!"
+            )
         } else {
             LazyVerticalGrid(
                 columns = GridCells.Fixed(2),

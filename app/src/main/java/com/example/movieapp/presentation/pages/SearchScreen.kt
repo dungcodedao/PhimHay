@@ -20,6 +20,8 @@ import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.example.movieapp.presentation.components.MovieGridCard
 import com.example.movieapp.presentation.components.ShimmerGrid
+import com.example.movieapp.presentation.components.EmptyState
+import com.example.movieapp.presentation.components.ErrorState
 import com.example.movieapp.presentation.viewmodel.SearchViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -31,7 +33,7 @@ fun SearchScreen(
     val searchQuery by viewModel.searchQuery.collectAsState()
     val searchResults = viewModel.searchResults.collectAsLazyPagingItems()
 
-    Column(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
+    Column(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background).statusBarsPadding()) {
         // Search Bar
         TextField(
             value = searchQuery,
@@ -51,29 +53,59 @@ fun SearchScreen(
             singleLine = true
         )
 
-        LazyVerticalGrid(
-            columns = GridCells.Fixed(2),
-            modifier = Modifier.fillMaxSize(),
-            contentPadding = PaddingValues(16.dp)
-        ) {
-            items(searchResults.itemCount) { index ->
-                val movie = searchResults[index]
-                if (movie != null) {
-                    MovieGridCard(movie = movie, onMovieClick = onMovieClick)
-                }
-            }
-
-            searchResults.apply {
-                when {
-                    loadState.refresh is LoadState.Loading && searchQuery.isNotBlank() -> {
-                        item(span = { GridItemSpan(maxLineSpan) }) {
-                            ShimmerGrid()
-                        }
+        if (searchQuery.isBlank()) {
+            EmptyState(
+                title = "Tìm phim bạn yêu thích",
+                subtitle = "Nhập tên bộ phim, diễn viên hoặc từ khóa để bắt đầu khám phá."
+            )
+        } else {
+            LazyVerticalGrid(
+                columns = GridCells.Fixed(2),
+                modifier = Modifier.fillMaxSize(),
+                contentPadding = PaddingValues(16.dp)
+            ) {
+                items(searchResults.itemCount) { index ->
+                    val movie = searchResults[index]
+                    if (movie != null) {
+                        MovieGridCard(movie = movie, onMovieClick = onMovieClick)
                     }
-                    loadState.refresh is LoadState.NotLoading && itemCount == 0 && searchQuery.isNotBlank() -> {
-                        item(span = { GridItemSpan(maxLineSpan) }) {
-                            Box(modifier = Modifier.fillMaxSize().padding(32.dp), contentAlignment = Alignment.Center) {
-                                Text("Không tìm thấy kết quả cho \"$searchQuery\"", textAlign = androidx.compose.ui.text.style.TextAlign.Center)
+                }
+
+                searchResults.apply {
+                    when {
+                        loadState.refresh is LoadState.Loading -> {
+                            item(span = { GridItemSpan(maxLineSpan) }) {
+                                ShimmerGrid()
+                            }
+                        }
+                        loadState.refresh is LoadState.Error -> {
+                            item(span = { GridItemSpan(maxLineSpan) }) {
+                                ErrorState(
+                                    message = "Lỗi kết nối khi tìm kiếm",
+                                    onRetry = { searchResults.retry() }
+                                )
+                            }
+                        }
+                        loadState.refresh is LoadState.NotLoading && itemCount == 0 -> {
+                            item(span = { GridItemSpan(maxLineSpan) }) {
+                                EmptyState(
+                                    title = "Không tìm thấy kết quả",
+                                    subtitle = "Chúng mình không tìm thấy phim nào khớp với \"$searchQuery\". Thử từ khóa khác xem sao!"
+                                )
+                            }
+                        }
+                        loadState.append is LoadState.Loading -> {
+                            item(span = { GridItemSpan(maxLineSpan) }) {
+                                Box(Modifier.fillMaxWidth().padding(16.dp), contentAlignment = Alignment.Center) {
+                                    CircularProgressIndicator(modifier = Modifier.size(32.dp))
+                                }
+                            }
+                        }
+                        loadState.append is LoadState.Error -> {
+                            item(span = { GridItemSpan(maxLineSpan) }) {
+                                Button(onClick = { searchResults.retry() }, modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+                                    Text("Thử lại")
+                                }
                             }
                         }
                     }

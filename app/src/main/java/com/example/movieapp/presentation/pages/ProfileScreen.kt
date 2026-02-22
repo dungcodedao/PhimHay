@@ -66,62 +66,40 @@ fun ProfileScreen(
         modifier = Modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
+            .navigationBarsPadding() // Thêm padding ở dưới cùng để không bị che bởi thanh điều hướng
             .verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         // ──────────────────────────────────────────────────
-        // HEADER BANNER với gradient
+        // HEADER BANNER - Sửa lỗi tràn viền
         // ──────────────────────────────────────────────────
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(230.dp)
+                .height(300.dp) // Tăng chiều cao thêm để không bị chật
                 .background(
                     Brush.verticalGradient(
                         colors = listOf(
                             Color(0xFF1A0A3E),
-                            Color(0xFF0D0D1A)
+                            Color(0xFF030114)
                         )
                     )
                 )
         ) {
-            // Decorative orb
-            Box(
-                modifier = Modifier
-                    .size(200.dp)
-                    .align(Alignment.TopEnd)
-                    .offset(x = 60.dp, y = (-30).dp)
-                    .background(
-                        Brush.radialGradient(
-                            colors = listOf(AccentCyan.copy(0.15f), Color.Transparent)
-                        )
-                    )
-            )
-            Box(
-                modifier = Modifier
-                    .size(160.dp)
-                    .align(Alignment.BottomStart)
-                    .offset(x = (-40).dp, y = 40.dp)
-                    .background(
-                        Brush.radialGradient(
-                            colors = listOf(AccentPurple.copy(0.2f), Color.Transparent)
-                        )
-                    )
-            )
-
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(top = 36.dp),
+                    .statusBarsPadding()
+                    .padding(horizontal = 20.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
-                // Avatar với ring tím
+                // Avatar với vòng gradient
                 Box(
                     modifier = Modifier
-                        .size(94.dp)
+                        .size(100.dp)
                         .background(
-                            Brush.linearGradient(listOf(AccentPurple, AccentCyan)),
+                            Brush.sweepGradient(listOf(AccentPurple, AccentCyan, AccentPurple)),
                             CircleShape
                         )
                         .padding(3.dp),
@@ -131,7 +109,7 @@ fun ProfileScreen(
                         modifier = Modifier
                             .fillMaxSize()
                             .clip(CircleShape)
-                            .background(Color(0xFF1A1A2E))
+                            .background(Color(0xFF0D0D1A))
                             .clickable(enabled = uiState.isLoggedIn) { imagePicker.launch("image/*") },
                         contentAlignment = Alignment.Center
                     ) {
@@ -148,139 +126,109 @@ fun ProfileScreen(
                         } else {
                             Icon(
                                 Icons.Rounded.Person, null,
-                                modifier = Modifier.size(48.dp),
-                                tint = AccentPurple
+                                modifier = Modifier.size(52.dp),
+                                tint = AccentPurple.copy(0.8f)
                             )
-                        }
-                        if (uiState.isLoading) {
-                            Box(
-                                Modifier.fillMaxSize().background(Color.Black.copy(0.4f)),
-                                contentAlignment = Alignment.Center
-                            ) {
-                                CircularProgressIndicator(color = Color.White, modifier = Modifier.size(28.dp), strokeWidth = 2.dp)
-                            }
                         }
                     }
                 }
-                // Nút camera nhỏ
-                if (uiState.isLoggedIn) {
-                    Box(
-                        modifier = Modifier
-                            .offset(y = (-16).dp)
-                            .align(Alignment.End)
-                    ) {}
-                }
 
-                Spacer(Modifier.height(10.dp))
+                Spacer(Modifier.height(16.dp))
 
                 if (uiState.isLoggedIn) {
                     Text(
-                        text = uiState.username ?: uiState.userEmail ?: "Người dùng",
-                        fontSize = 20.sp,
-                        fontWeight = FontWeight.Bold,
+                        text = uiState.username ?: uiState.userEmail?.substringBefore("@") ?: "Người dùng",
+                        fontSize = 22.sp,
+                        fontWeight = FontWeight.ExtraBold,
                         color = Color.White
                     )
-                    if (uiState.username != null) {
-                        Text(
-                            uiState.userEmail ?: "",
-                            fontSize = 12.sp,
-                            color = TextSecondary
-                        )
-                    }
-                    Spacer(Modifier.height(6.dp))
+                    Text(
+                        uiState.userEmail ?: "",
+                        fontSize = 13.sp,
+                        color = TextSecondary.copy(0.8f)
+                    )
+                    Spacer(Modifier.height(12.dp))
+                    
                     // Badge Premium
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(4.dp),
-                        modifier = Modifier
-                            .clip(RoundedCornerShape(20.dp))
-                            .background(AccentGold.copy(0.15f))
-                            .padding(horizontal = 10.dp, vertical = 4.dp)
+                    Surface(
+                        shape = RoundedCornerShape(20.dp),
+                        color = AccentGold.copy(0.2f),
+                        border = androidx.compose.foundation.BorderStroke(1.dp, AccentGold.copy(0.5f))
                     ) {
-                        Icon(Icons.Rounded.Star, null, tint = AccentGold, modifier = Modifier.size(13.dp))
-                        Text("Thành viên Premium", color = AccentGold, fontSize = 11.sp, fontWeight = FontWeight.SemiBold)
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(6.dp),
+                            modifier = Modifier.padding(horizontal = 14.dp, vertical = 6.dp)
+                        ) {
+                            Icon(Icons.Rounded.Star, null, tint = AccentGold, modifier = Modifier.size(14.dp))
+                            Text("PREMIUM MEMBER", color = AccentGold, fontSize = 11.sp, fontWeight = FontWeight.Black)
+                        }
                     }
+                    // Thêm khoảng trống ở dưới cùng của header để Stats Card không đè lên
+                    Spacer(Modifier.height(30.dp))
                 } else {
-                    Text("Chào mừng bạn! 👋", fontSize = 18.sp, fontWeight = FontWeight.Bold, color = Color.White)
-                    Spacer(Modifier.height(6.dp))
-                    Text("Đăng nhập để trải nghiệm đầy đủ tính năng", fontSize = 12.sp, color = TextSecondary)
+                    Text("Ready to Watch? 🎬", fontSize = 20.sp, fontWeight = FontWeight.Bold, color = Color.White)
+                    Spacer(Modifier.height(8.dp))
+                    Text("Tham gia ngay để lưu phim và nhận thông báo!", fontSize = 12.sp, color = TextSecondary, textAlign = TextAlign.Center)
+                    Spacer(Modifier.height(20.dp))
                 }
             }
         }
 
         // ──────────────────────────────────────────────────
-        // STATS BAR (chỉ hiện khi đã login)
+        // STATS & CTA BAR
         // ──────────────────────────────────────────────────
         if (uiState.isLoggedIn) {
             Surface(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 20.dp)
-                    .offset(y = (-16).dp),
-                shape = RoundedCornerShape(20.dp),
-                color = Color(0xFF1C1C2E),
-                shadowElevation = 8.dp
+                    .offset(y = (-20).dp), // Giảm bớt độ đẩy lên để không đè Badge
+                shape = RoundedCornerShape(24.dp),
+                color = Color(0xFF141426),
+                border = androidx.compose.foundation.BorderStroke(1.dp, Color.White.copy(0.05f)),
+                shadowElevation = 12.dp
             ) {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(vertical = 16.dp),
-                    horizontalArrangement = Arrangement.SpaceEvenly
+                        .padding(vertical = 20.dp),
+                    horizontalArrangement = Arrangement.SpaceEvenly,
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
                     ProfileStatItem(
                         value = historyState.history.size.toString(),
-                        label = "Đã xem",
+                        label = "ĐÃ XEM",
                         color = AccentCyan
                     )
-                    // Divider dọc
-                    Box(
-                        modifier = Modifier
-                            .width(1.dp)
-                            .height(40.dp)
-                            .background(Color.White.copy(0.08f))
-                    )
+                    Box(modifier = Modifier.width(1.dp).height(30.dp).background(Color.White.copy(0.1f)))
                     ProfileStatItem(
                         value = favoriteState.favorites.size.toString(),
-                        label = "Yêu thích",
+                        label = "YÊU THÍCH",
                         color = ErrorRed
                     )
-                    Box(
-                        modifier = Modifier
-                            .width(1.dp)
-                            .height(40.dp)
-                            .background(Color.White.copy(0.08f))
-                    )
+                    Box(modifier = Modifier.width(1.dp).height(30.dp).background(Color.White.copy(0.1f)))
                     ProfileStatItem(
-                        value = "0",
-                        label = "Đánh giá",
+                        value = "1.2k",
+                        label = "PHÚT XEM",
                         color = AccentGold
                     )
                 }
             }
         } else {
-            // CTA đăng nhập nổi bật
-            Box(
+            Button(
+                onClick = onNavigateLogin,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 20.dp)
-                    .offset(y = (-16).dp)
-                    .clip(RoundedCornerShape(20.dp))
-                    .background(Brush.horizontalGradient(listOf(AccentPurple, Color(0xFF9B59B6))))
-                    .clickable { onNavigateLogin() }
-                    .padding(vertical = 16.dp),
-                contentAlignment = Alignment.Center
+                    .height(60.dp)
+                    .offset(y = (-24).dp),
+                shape = RoundedCornerShape(20.dp),
+                colors = ButtonDefaults.buttonColors(containerColor = AccentPurple)
             ) {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    Icon(Icons.Rounded.Login, null, tint = Color.White, modifier = Modifier.size(20.dp))
-                    Text(
-                        "Đăng nhập / Đăng ký",
-                        color = Color.White,
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 16.sp
-                    )
+                Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    Icon(Icons.Rounded.Login, null)
+                    Text("ĐĂNG NHẬP NGAY", fontWeight = FontWeight.ExtraBold, letterSpacing = 1.sp)
                 }
             }
         }

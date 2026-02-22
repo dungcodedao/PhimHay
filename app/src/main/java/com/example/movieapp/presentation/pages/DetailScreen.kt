@@ -350,6 +350,7 @@ fun DetailScreen(
                 IconButton(
                     onClick = onBackClick,
                     modifier = Modifier
+                        .statusBarsPadding()
                         .padding(12.dp)
                         .align(Alignment.TopStart)
                         .background(Color.Black.copy(0.4f), CircleShape)

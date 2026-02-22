@@ -26,7 +26,7 @@ fun AppNavigation() {
             navController = navController,
             startDestination = SplashRoute
         ) {
-            // Splash
+            // Splash - Giữ lại route này nếu vẫn muốn dùng cho mục đích khác, nhưng không làm màn hình khởi động
             composable<SplashRoute> {
                 SplashScreen(
                     onSplashFinished = {

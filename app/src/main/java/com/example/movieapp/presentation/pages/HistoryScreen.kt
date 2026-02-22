@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.movieapp.presentation.components.EmptyState
 import com.example.movieapp.presentation.components.MovieGridCard
 import com.example.movieapp.presentation.components.ShimmerGrid
 import com.example.movieapp.presentation.viewmodel.HistoryViewModel
@@ -43,7 +44,7 @@ fun HistoryScreen(
         )
     }
 
-    Column(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
+    Column(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background).statusBarsPadding()) {
         Row(
             modifier = Modifier.fillMaxWidth().padding(16.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
@@ -64,9 +65,10 @@ fun HistoryScreen(
         if (uiState.isLoading) {
             ShimmerGrid()
         } else if (uiState.history.isEmpty()) {
-            Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                Text("Lịch sử trống", color = MaterialTheme.colorScheme.onSurfaceVariant)
-            }
+            EmptyState(
+                title = "Lịch sử xem trống",
+                subtitle = "Các bộ phim bạn đã xem sẽ xuất hiện ở đây"
+            )
         } else {
             LazyVerticalGrid(
                 columns = GridCells.Fixed(2),
