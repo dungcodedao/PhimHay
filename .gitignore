@@ -14,14 +14,17 @@ local.properties
 
 # Logs and temporary build files
 *.log
-*log.txt
-*error.txt
+*.txt
+build_*.txt
 compile_*.log
 final_*.log
 
-# Project Documentation
+# Project Documentation & Plans (AI Generated)
 IMPLEMENTATION_PLAN.md
 ARCHITECTURE.md
+DEVELOPMENT_PROMPTS.md
+PROJECT_SUMMARY.md
 
 # Other personal/binary files
 *.pdf
+local.properties
