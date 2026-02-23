@@ -20,8 +20,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -46,13 +48,14 @@ import com.example.movieapp.ui.theme.AccentGold
 @Composable
 fun DetailScreen(
     onBackClick: () -> Unit,
-    onMovieClick: (Int) -> Unit,
+    onMovieClick: (Int, Boolean) -> Unit,
     onCastClick: (Int) -> Unit,
     onPlayClick: (String, String) -> Unit,
     viewModel: DetailViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val context = LocalContext.current
+    val haptic = LocalHapticFeedback.current
     val sharedTransitionScope = LocalSharedTransitionScope.current
     val animatedContentScope = LocalAnimatedContentScope.current
 
@@ -153,6 +156,7 @@ fun DetailScreen(
                             // Nút "Xem Phim" → Dùng VidSrc (nguồn stream phim thực sự, không bị chặn!)
                             Button(
                                 onClick = {
+                                    haptic.performHapticFeedback(HapticFeedbackType.LongPress)
                                     onPlayClick("https://vidsrc.to/embed/movie/${movie.id}", movie.title)
                                 },
                                 modifier = Modifier.weight(1f).height(50.dp),
@@ -168,6 +172,7 @@ fun DetailScreen(
                             val trailer = uiState.videos.firstOrNull { it.isYoutubeTrailer }
                             FilledTonalIconButton(
                                 onClick = {
+                                    haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                                     trailer?.let {
                                         onPlayClick("https://www.youtube-nocookie.com/embed/${it.key}?rel=0&autoplay=1", "Trailer: ${movie.title}")
                                     }
@@ -196,6 +201,7 @@ fun DetailScreen(
                                 val shareTitle = stringResource(R.string.share_title)
                                 val shareMessage = stringResource(R.string.share_message, movie.title, movie.id)
                                 IconButton(onClick = {
+                                    haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                                     val intent = Intent(Intent.ACTION_SEND).apply {
                                         type = "text/plain"
                                         putExtra(Intent.EXTRA_TITLE, movie.title)
@@ -220,7 +226,10 @@ fun DetailScreen(
                             ) {
                                 LottieFavoriteButton(
                                     isFavorite = uiState.isFavorite,
-                                    onClick = { viewModel.toggleFavorite() }
+                                    onClick = {
+                                        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                                        viewModel.toggleFavorite()
+                                    }
                                 )
                             }
                         }
@@ -330,7 +339,7 @@ fun DetailScreen(
                             ) {
                                 items(uiState.similarMovies) { similar ->
                                     Card(
-                                        onClick = { onMovieClick(similar.id) },
+                                        onClick = { onMovieClick(similar.id, similar.isTV) },
                                         shape = RoundedCornerShape(12.dp),
                                         modifier = Modifier.width(110.dp).height(160.dp)
                                     ) {

@@ -13,6 +13,7 @@ import javax.inject.Inject
 data class FavoriteUiState(
     val favorites: List<Movie> = emptyList(),
     val isLoading: Boolean = false,
+    val isRefreshing: Boolean = false,
     val error: String? = null
 )
 
@@ -44,6 +45,17 @@ class FavoriteViewModel @Inject constructor(
                     is Resource.Loading -> _uiState.update { it.copy(isLoading = true) }
                     is Resource.Success -> _uiState.update { it.copy(isLoading = false) }
                     is Resource.Error -> _uiState.update { it.copy(isLoading = false, error = result.message) }
+                }
+            }
+        }
+    }
+
+    fun refresh() {
+        viewModelScope.launch {
+            _uiState.update { it.copy(isRefreshing = true) }
+            manageFavoriteUseCase.syncWithCloud().collect { result ->
+                if (result !is Resource.Loading) {
+                    _uiState.update { it.copy(isRefreshing = false) }
                 }
             }
         }

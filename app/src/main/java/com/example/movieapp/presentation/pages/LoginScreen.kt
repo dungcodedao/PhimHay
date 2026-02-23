@@ -16,6 +16,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -34,6 +36,7 @@ fun LoginScreen(
     viewModel: AuthViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsState()
+    val haptic = LocalHapticFeedback.current
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var passwordVisible by remember { mutableStateOf(false) }
@@ -224,7 +227,10 @@ fun LoginScreen(
                         contentAlignment = Alignment.Center
                     ) {
                         Button(
-                            onClick = { viewModel.login(email, password) },
+                            onClick = { 
+                                haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                                viewModel.login(email, password) 
+                            },
                             modifier = Modifier.fillMaxSize(),
                             enabled = !uiState.isLoading && isEmailValid && isPasswordValid,
                             colors = ButtonDefaults.buttonColors(
@@ -274,15 +280,18 @@ fun LoginScreen(
 
             // Divider
             Row(verticalAlignment = Alignment.CenterVertically) {
-                Divider(modifier = Modifier.weight(1f), color = Color.White.copy(0.1f))
+                HorizontalDivider(modifier = Modifier.weight(1f), color = Color.White.copy(0.1f))
                 Text("  hoặc  ", color = TextSecondary, fontSize = 12.sp)
-                Divider(modifier = Modifier.weight(1f), color = Color.White.copy(0.1f))
+                HorizontalDivider(modifier = Modifier.weight(1f), color = Color.White.copy(0.1f))
             }
 
             Spacer(Modifier.height(16.dp))
 
             TextButton(
-                onClick = onNavigateRegister,
+                onClick = {
+                    haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                    onNavigateRegister()
+                },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(50.dp)

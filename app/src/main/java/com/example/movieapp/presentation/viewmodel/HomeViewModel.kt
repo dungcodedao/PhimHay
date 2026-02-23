@@ -17,10 +17,15 @@ import javax.inject.Inject
 
 data class HomeUiState(
     val trendingMovies: List<Movie> = emptyList(),
-    val freeMovies: List<Movie> = emptyList(),
+    val popularMovies: List<Movie> = emptyList(),
+    val topRatedMovies: List<Movie> = emptyList(),
+    val upcomingMovies: List<Movie> = emptyList(),
+    val trendingTV: List<Movie> = emptyList(),
+    val popularTV: List<Movie> = emptyList(),
     val genres: List<Genre> = emptyList(),
     val selectedGenreId: Int? = null,
     val isLoading: Boolean = false,
+    val isRefreshing: Boolean = false,
     val error: String? = null
 )
 
@@ -46,7 +51,7 @@ class HomeViewModel @Inject constructor(
 
     init {
         loadGenres()
-        loadTrendingAndFree()
+        loadAllContent()
     }
 
     private fun loadGenres() {
@@ -59,30 +64,50 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    private fun loadTrendingAndFree() {
+    private fun loadAllContent() {
         viewModelScope.launch {
             _uiState.update { it.copy(isLoading = true) }
             
-            // Collect Trending
+            // Trending
             launch {
                 getHomeMoviesUseCase.getTrending().collect { result ->
-                    when (result) {
-                        is Resource.Success -> {
-                            _uiState.update { it.copy(trendingMovies = result.data, isLoading = false) }
-                        }
-                        is Resource.Error -> {
-                            _uiState.update { it.copy(error = result.message, isLoading = false) }
-                        }
-                        Resource.Loading -> { }
-                    }
+                    if (result is Resource.Success) _uiState.update { it.copy(trendingMovies = result.data) }
                 }
             }
 
-            // Collect Free Phim (Popular)
+            // Popular (Phim lẻ)
             launch {
                 getHomeMoviesUseCase.getPopular().collect { result ->
+                    if (result is Resource.Success) _uiState.update { it.copy(popularMovies = result.data) }
+                }
+            }
+
+            // Phim bộ (TV Trending)
+            launch {
+                getHomeMoviesUseCase.getTrendingTV().collect { result ->
+                    if (result is Resource.Success) _uiState.update { it.copy(trendingTV = result.data) }
+                }
+            }
+
+            // TV Popular
+            launch {
+                getHomeMoviesUseCase.getPopularTV().collect { result ->
+                    if (result is Resource.Success) _uiState.update { it.copy(popularTV = result.data) }
+                }
+            }
+
+            // Sắp chiếu
+            launch {
+                getHomeMoviesUseCase.getUpcoming().collect { result ->
+                    if (result is Resource.Success) _uiState.update { it.copy(upcomingMovies = result.data) }
+                }
+            }
+
+            // Đánh giá cao
+            launch {
+                getHomeMoviesUseCase.getTopRated().collect { result ->
                     if (result is Resource.Success) {
-                        _uiState.update { it.copy(freeMovies = result.data.take(15)) }
+                        _uiState.update { it.copy(topRatedMovies = result.data, isLoading = false) }
                     }
                 }
             }
@@ -92,5 +117,12 @@ class HomeViewModel @Inject constructor(
     fun onGenreSelected(genreId: Int?) {
         _uiState.update { it.copy(selectedGenreId = genreId) }
         selectedGenreFlow.value = genreId
+    }
+
+    fun refresh() {
+        _uiState.update { it.copy(isRefreshing = true, error = null) }
+        loadGenres()
+        loadAllContent()
+        _uiState.update { it.copy(isRefreshing = false) }
     }
 }

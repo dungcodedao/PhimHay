@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 @Serializable object LoginRoute
 @Serializable object RegisterRoute
 @Serializable object HomeRoute
-@Serializable data class DetailRoute(val movieId: Int)
+@Serializable data class DetailRoute(val movieId: Int, val isTV: Boolean = false)
 @Serializable object SearchRoute
 @Serializable object FavoriteRoute
 @Serializable object ProfileRoute

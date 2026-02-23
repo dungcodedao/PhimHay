@@ -24,6 +24,49 @@ interface MovieApiService {
         @Query("page") page: Int = 1
     ): MovieListResponse
 
+    @GET("movie/top_rated")
+    suspend fun getTopRatedMovies(
+        @Query("api_key") apiKey: String,
+        @Query("language") language: String = "vi-VN",
+        @Query("page") page: Int = 1
+    ): MovieListResponse
+
+    @GET("movie/upcoming")
+    suspend fun getUpcomingMovies(
+        @Query("api_key") apiKey: String,
+        @Query("language") language: String = "vi-VN",
+        @Query("page") page: Int = 1
+    ): MovieListResponse
+
+    @GET("movie/now_playing")
+    suspend fun getNowPlayingMovies(
+        @Query("api_key") apiKey: String,
+        @Query("language") language: String = "vi-VN",
+        @Query("page") page: Int = 1
+    ): MovieListResponse
+
+    // TV Series Endpoints
+    @GET("trending/tv/week")
+    suspend fun getTrendingTV(
+        @Query("api_key") apiKey: String,
+        @Query("language") language: String = "vi-VN",
+        @Query("page") page: Int = 1
+    ): MovieListResponse
+
+    @GET("tv/popular")
+    suspend fun getPopularTV(
+        @Query("api_key") apiKey: String,
+        @Query("language") language: String = "vi-VN",
+        @Query("page") page: Int = 1
+    ): MovieListResponse
+
+    @GET("tv/top_rated")
+    suspend fun getTopRatedTV(
+        @Query("api_key") apiKey: String,
+        @Query("language") language: String = "vi-VN",
+        @Query("page") page: Int = 1
+    ): MovieListResponse
+
     @GET("movie/{movie_id}")
     suspend fun getMovieDetail(
         @Path("movie_id") movieId: Int,
@@ -48,6 +91,36 @@ interface MovieApiService {
     @GET("movie/{movie_id}/similar")
     suspend fun getSimilarMovies(
         @Path("movie_id") movieId: Int,
+        @Query("api_key") apiKey: String,
+        @Query("language") language: String = "vi-VN",
+        @Query("page") page: Int = 1
+    ): MovieListResponse
+
+    // ========== TV SERIES DETAIL ENDPOINTS ==========
+    @GET("tv/{tv_id}")
+    suspend fun getTVDetail(
+        @Path("tv_id") tvId: Int,
+        @Query("api_key") apiKey: String,
+        @Query("language") language: String = "vi-VN"
+    ): MovieDetailDto
+
+    @GET("tv/{tv_id}/videos")
+    suspend fun getTVVideos(
+        @Path("tv_id") tvId: Int,
+        @Query("api_key") apiKey: String,
+        @Query("language") language: String = "vi-VN"
+    ): VideoListResponse
+
+    @GET("tv/{tv_id}/credits")
+    suspend fun getTVCredits(
+        @Path("tv_id") tvId: Int,
+        @Query("api_key") apiKey: String,
+        @Query("language") language: String = "vi-VN"
+    ): CreditsResponse
+
+    @GET("tv/{tv_id}/similar")
+    suspend fun getSimilarTV(
+        @Path("tv_id") tvId: Int,
         @Query("api_key") apiKey: String,
         @Query("language") language: String = "vi-VN",
         @Query("page") page: Int = 1

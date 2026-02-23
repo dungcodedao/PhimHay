@@ -53,11 +53,13 @@ class DetailViewModel @Inject constructor(
     val uiState = _uiState.asStateFlow()
 
     private var movieId: Int = -1
+    private var isTV: Boolean = false
 
     init {
         try {
             val route = ssHandle.toRoute<com.example.movieapp.presentation.navigation.DetailRoute>()
             movieId = route.movieId
+            isTV = route.isTV
             loadAllData(movieId)
             observeFavoriteStatus(movieId)
             loadRatings(movieId)
@@ -70,9 +72,9 @@ class DetailViewModel @Inject constructor(
         viewModelScope.launch {
             _uiState.update { it.copy(isLoading = true, error = null) }
 
-            // Collect Movie Detail
+            // Collect Movie/TV Detail
             launch {
-                getMovieDetailUseCase.getDetail(id).collect { result ->
+                getMovieDetailUseCase.getDetail(id, isTV).collect { result ->
                     when (result) {
                         is Resource.Success -> {
                             _uiState.update { it.copy(movieDetail = result.data, isLoading = false) }
@@ -91,7 +93,7 @@ class DetailViewModel @Inject constructor(
 
             // Collect Videos
             launch {
-                getMovieDetailUseCase.getVideos(id).collect { result ->
+                getMovieDetailUseCase.getVideos(id, isTV).collect { result ->
                     if (result is Resource.Success) {
                         _uiState.update { it.copy(videos = result.data) }
                     }
@@ -100,16 +102,16 @@ class DetailViewModel @Inject constructor(
 
             // Collect Cast
             launch {
-                getMovieDetailUseCase.getCast(id).collect { result ->
+                getMovieDetailUseCase.getCast(id, isTV).collect { result ->
                     if (result is Resource.Success) {
                         _uiState.update { it.copy(cast = result.data) }
                     }
                 }
             }
 
-            // Collect Similar Movies
+            // Collect Similar
             launch {
-                getMovieDetailUseCase.getSimilar(id).collect { result ->
+                getMovieDetailUseCase.getSimilar(id, isTV).collect { result ->
                     if (result is Resource.Success) {
                         _uiState.update { it.copy(similarMovies = result.data) }
                     }

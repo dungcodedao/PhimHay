@@ -11,11 +11,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import com.example.movieapp.presentation.components.EmptyState
 import com.example.movieapp.presentation.components.MovieGridCard
 import com.example.movieapp.presentation.components.ShimmerGrid
 import com.example.movieapp.presentation.viewmodel.FavoriteViewModel
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FavoriteScreen(
     onMovieClick: (Int) -> Unit,
@@ -31,21 +33,27 @@ fun FavoriteScreen(
             modifier = Modifier.padding(16.dp)
         )
 
-        if (uiState.isLoading) {
-            ShimmerGrid()
-        } else if (uiState.favorites.isEmpty()) {
-            EmptyState(
-                title = "Chưa có phim yêu thích",
-                subtitle = "Nhấn vào biểu tượng ❤️ trên màn hình phim để thêm vào đây nhé!"
-            )
-        } else {
-            LazyVerticalGrid(
-                columns = GridCells.Fixed(2),
-                modifier = Modifier.fillMaxSize(),
-                contentPadding = PaddingValues(16.dp)
-            ) {
-                items(uiState.favorites) { movie ->
-                    MovieGridCard(movie = movie, onMovieClick = onMovieClick)
+        PullToRefreshBox(
+            isRefreshing = uiState.isRefreshing,
+            onRefresh = { viewModel.refresh() },
+            modifier = Modifier.weight(1f)
+        ) {
+            if (uiState.isLoading && uiState.favorites.isEmpty()) {
+                ShimmerGrid()
+            } else if (uiState.favorites.isEmpty()) {
+                EmptyState(
+                    title = "Chưa có phim yêu thích",
+                    subtitle = "Nhấn vào biểu tượng ❤️ trên màn hình phim để thêm vào đây nhé!"
+                )
+            } else {
+                LazyVerticalGrid(
+                    columns = GridCells.Fixed(2),
+                    modifier = Modifier.fillMaxSize(),
+                    contentPadding = PaddingValues(16.dp)
+                ) {
+                    items(uiState.favorites) { movie ->
+                        MovieGridCard(movie = movie, onMovieClick = onMovieClick)
+                    }
                 }
             }
         }

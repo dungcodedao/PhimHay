@@ -14,13 +14,28 @@ interface IMovieRepository {
     // Luồng dữ liệu cho Home
     fun getTrendingMovies(): Flow<Resource<List<Movie>>>
     fun getPopularMovies(page: Int = 1): Flow<Resource<List<Movie>>>
+    fun getTopRatedMovies(): Flow<Resource<List<Movie>>>
+    fun getUpcomingMovies(): Flow<Resource<List<Movie>>>
+    fun getNowPlayingMovies(): Flow<Resource<List<Movie>>>
+    
+    // TV Series
+    fun getTrendingTV(): Flow<Resource<List<Movie>>>
+    fun getPopularTV(): Flow<Resource<List<Movie>>>
+    fun getTopRatedTV(): Flow<Resource<List<Movie>>>
+    
     fun getMovieGenres(): Flow<Resource<List<Genre>>>
     
-    // Chi tiết phim
+    // Chi tiết phim lẻ
     fun getMovieDetail(movieId: Int): Flow<Resource<MovieDetail>>
     fun getMovieVideos(movieId: Int): Flow<Resource<List<MovieVideo>>>
     fun getMovieCredits(movieId: Int): Flow<Resource<List<Cast>>>
     fun getSimilarMovies(movieId: Int): Flow<Resource<List<Movie>>>
+    
+    // Chi tiết phim bộ (TV Series)
+    fun getTVDetail(tvId: Int): Flow<Resource<MovieDetail>>
+    fun getTVVideos(tvId: Int): Flow<Resource<List<MovieVideo>>>
+    fun getTVCredits(tvId: Int): Flow<Resource<List<Cast>>>
+    fun getSimilarTV(tvId: Int): Flow<Resource<List<Movie>>>
     
     // Tìm kiếm & Lọc
     fun searchMovies(query: String, page: Int = 1): Flow<Resource<List<Movie>>>

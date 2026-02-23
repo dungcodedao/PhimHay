@@ -7,6 +7,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -15,6 +16,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -33,6 +37,7 @@ fun RegisterScreen(
     viewModel: AuthViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsState()
+    val haptic = LocalHapticFeedback.current
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var passwordVisible by remember { mutableStateOf(false) }
@@ -102,13 +107,16 @@ fun RegisterScreen(
             // Back button
             Row(modifier = Modifier.fillMaxWidth()) {
                 IconButton(
-                    onClick = onBackClick,
+                    onClick = {
+                        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                        onBackClick()
+                    },
                     modifier = Modifier
                         .size(42.dp)
                         .clip(RoundedCornerShape(12.dp))
                         .background(Color.White.copy(0.08f))
                 ) {
-                    Icon(Icons.Rounded.ArrowBack, null, tint = Color.White, modifier = Modifier.size(20.dp))
+                    Icon(Icons.AutoMirrored.Rounded.ArrowBack, null, tint = Color.White, modifier = Modifier.size(20.dp))
                 }
             }
 
@@ -269,7 +277,10 @@ fun RegisterScreen(
                         contentAlignment = Alignment.Center
                     ) {
                         Button(
-                            onClick = { viewModel.register(email, password) },
+                            onClick = { 
+                                haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                                viewModel.register(email, password) 
+                            },
                             modifier = Modifier.fillMaxSize(),
                             enabled = !uiState.isLoading && isEmailValid && isPasswordValid,
                             colors = ButtonDefaults.buttonColors(
@@ -318,9 +329,9 @@ fun RegisterScreen(
             Spacer(Modifier.height(24.dp))
 
             Row(verticalAlignment = Alignment.CenterVertically) {
-                Divider(modifier = Modifier.weight(1f), color = Color.White.copy(0.1f))
+                HorizontalDivider(modifier = Modifier.weight(1f), color = Color.White.copy(0.1f))
                 Text("  hoặc  ", color = TextSecondary, fontSize = 12.sp)
-                Divider(modifier = Modifier.weight(1f), color = Color.White.copy(0.1f))
+                HorizontalDivider(modifier = Modifier.weight(1f), color = Color.White.copy(0.1f))
             }
 
             Spacer(Modifier.height(16.dp))

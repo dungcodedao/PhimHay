@@ -17,13 +17,15 @@ data class MovieListResponse(
 @Serializable
 data class MovieDto(
     @SerialName("id") val id: Int,
-    @SerialName("title") val title: String,
+    @SerialName("title") val title: String? = null,
+    @SerialName("name") val name: String? = null,
     @SerialName("overview") val overview: String,
     @SerialName("poster_path") val posterPath: String? = null,
     @SerialName("backdrop_path") val backdropPath: String? = null,
     @SerialName("vote_average") val voteAverage: Double = 0.0,
     @SerialName("vote_count") val voteCount: Int = 0,
-    @SerialName("release_date") val releaseDate: String = "",
+    @SerialName("release_date") val releaseDate: String? = null,
+    @SerialName("first_air_date") val firstAirDate: String? = null,
     @SerialName("genre_ids") val genreIds: List<Int> = emptyList(),
     @SerialName("popularity") val popularity: Double = 0.0,
     @SerialName("adult") val adult: Boolean = false
@@ -32,13 +34,15 @@ data class MovieDto(
 @Serializable
 data class MovieDetailDto(
     @SerialName("id") val id: Int,
-    @SerialName("title") val title: String,
+    @SerialName("title") val title: String? = null,
+    @SerialName("name") val name: String? = null,
     @SerialName("overview") val overview: String,
     @SerialName("poster_path") val posterPath: String? = null,
     @SerialName("backdrop_path") val backdropPath: String? = null,
     @SerialName("vote_average") val voteAverage: Double = 0.0,
     @SerialName("vote_count") val voteCount: Int = 0,
-    @SerialName("release_date") val releaseDate: String = "",
+    @SerialName("release_date") val releaseDate: String? = null,
+    @SerialName("first_air_date") val firstAirDate: String? = null,
     @SerialName("runtime") val runtime: Int = 0,
     @SerialName("genres") val genres: List<GenreDto> = emptyList(),
     @SerialName("status") val status: String = "",

@@ -44,8 +44,8 @@ fun AppNavigation() {
                     LocalAnimatedContentScope provides this@composable
                 ) {
                     MainScreen(
-                        onNavigateToDetail = { movieId ->
-                            navController.navigate(DetailRoute(movieId = movieId))
+                        onNavigateToDetail = { movieId, isTV ->
+                            navController.navigate(DetailRoute(movieId = movieId, isTV = isTV))
                         },
                         onNavigateToLogin = {
                             navController.navigate(LoginRoute)
@@ -70,8 +70,8 @@ fun AppNavigation() {
                 ) {
                     DetailScreen(
                         onBackClick = { navController.popBackStack() },
-                        onMovieClick = { movieId ->
-                            navController.navigate(DetailRoute(movieId = movieId))
+                        onMovieClick = { movieId, isTV ->
+                            navController.navigate(DetailRoute(movieId = movieId, isTV = isTV))
                         },
                         onCastClick = { actorId ->
                             navController.navigate(ActorRoute(actorId = actorId))

@@ -13,7 +13,7 @@ import com.example.movieapp.data.local.entity.*
         FavoriteMovieEntity::class, 
         HistoryMovieEntity::class
     ],
-    version = 3,
+    version = 4,
     exportSchema = false
 )
 abstract class MovieDatabase : RoomDatabase() {

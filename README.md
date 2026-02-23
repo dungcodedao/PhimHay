@@ -1,209 +1,59 @@
-# 🎬 PhimHay — Modern Movie Explorer App
+# 🎬 PhimHay - Cinematic Movie Experience
 
-> *Ứng dụng khám phá phim hiện đại, xây dựng theo chuẩn Production-Ready*
+[![Kotlin](https://img.shields.io/badge/Kotlin-true-blue?style=flat&logo=kotlin)](https://kotlinlang.org)
+[![Jetpack Compose](https://img.shields.io/badge/Jetpack%20Compose-v1.7-green?style=flat&logo=jetpackcompose)](https://developer.android.com/jetpack/compose)
+[![Supabase](https://img.shields.io/badge/Backend-Supabase-black?style=flat&logo=supabase)](https://supabase.com)
+[![License](https://img.shields.io/badge/License-MIT-gold.svg)](LICENSE)
 
-[![Android](https://img.shields.io/badge/Platform-Android%2026+-3DDC84?style=for-the-badge&logo=android&logoColor=white)](https://www.android.com)
-[![Kotlin](https://img.shields.io/badge/Language-Kotlin-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white)](https://kotlinlang.org)
-[![Jetpack Compose](https://img.shields.io/badge/UI-Jetpack%20Compose-4285F4?style=for-the-badge&logo=jetpackcompose&logoColor=white)](https://developer.android.com/jetpack/compose)
-[![Clean Architecture](https://img.shields.io/badge/Architecture-Clean%20%2B%20MVVM-FF4081?style=for-the-badge)](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
-[![Supabase](https://img.shields.io/badge/Backend-Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)](https://supabase.com)
-
----
-
-## 📖 Tổng quan / About
-
-**PhimHay** is a full-featured Android application for discovering and exploring movies, built with modern Android development best practices. It demonstrates a production-ready implementation of **Clean Architecture**, **Jetpack Compose**, and **Supabase** backend services.
-
-**PhimHay** là ứng dụng Android đầy đủ tính năng để khám phá phim, được xây dựng theo các thực hành tốt nhất trong phát triển Android hiện đại. Dự án thể hiện việc triển khai **Clean Architecture**, **Jetpack Compose** và dịch vụ backend **Supabase** theo tiêu chuẩn Production.
+**PhimHay** là một ứng dụng xem thông tin và stream phim cao cấp được xây dựng trên nền tảng **Android Native** hiện đại. Ứng dụng tập trung vào trải nghiệm người dùng với phong cách thiết kế **Dark Cinematic Premium**, kết hợp cùng các công nghệ mới nhất để mang lại hiệu năng mượt mà và giao diện sống động.
 
 ---
 
-## 🏗️ Kiến trúc / Architecture
+## 🌟 Đánh giá trải nghiệm (Review)
 
-Sơ đồ dưới đây thể hiện **luồng dữ liệu một chiều (Unidirectional Data Flow)** của toàn bộ ứng dụng:
+PhimHay không chỉ là một kho dữ liệu phim mà là một "rạp phim bỏ túi" đúng nghĩa. Ngay từ màn hình **Intro Cinematic**, người dùng đã cảm nhận được sự tỉ mỉ trong từng hiệu ứng chuyển động. Điểm nhấn lớn nhất nằm ở:
 
-```mermaid
-graph TD
-    subgraph Presentation ["🖥️ Presentation Layer"]
-        UI["Jetpack Compose UI\n(Screens & Components)"]
-        VM["ViewModel\n(UI State & Events)"]
-        UI -- "User Events" --> VM
-        VM -- "UI State (StateFlow)" --> UI
-    end
-
-    subgraph Domain ["⚙️ Domain Layer (Pure Kotlin)"]
-        UC["UseCases\n(Business Logic)"]
-        REPO_I["Repository Interfaces"]
-        UC --> REPO_I
-    end
-
-    subgraph Data ["💾 Data Layer"]
-        REPO["Repository\nImplementations"]
-        REMOTE["Remote DataSource\n(Retrofit + Supabase)"]
-        LOCAL["Local DataSource\n(Room Database)"]
-        REPO --> REMOTE
-        REPO --> LOCAL
-    end
-
-    subgraph Sources ["🌐 Data Sources"]
-        TMDB["TMDb API\n(Movie Data)"]
-        SUPA["Supabase\n(Auth + Realtime)"]
-        ROOM[("Room DB\n⭐ Single Source of Truth")]
-    end
-
-    VM -- "calls" --> UC
-    UC --> REPO
-    REPO_I -.-> REPO
-    REMOTE --> TMDB
-    REMOTE --> SUPA
-    LOCAL --> ROOM
-    ROOM -- "offline cache" --> LOCAL
-
-    style Presentation fill:#1a1a2e,stroke:#4285F4
-    style Domain fill:#16213e,stroke:#FF4081
-    style Data fill:#0f3460,stroke:#3ECF8E
-    style Sources fill:#533483,stroke:#7F52FF
-    style ROOM fill:#2d6a4f,stroke:#52b788,color:#fff
-```
-
-> ⭐ **Room Database** đóng vai trò là **Single Source of Truth** — toàn bộ UI chỉ đọc dữ liệu từ Room, không đọc trực tiếp từ API.
+- **Giao diện Glassmorphism:** Thanh điều hướng nổi với hiệu ứng kính mờ tạo chiều sâu cho không gian hiển thị.
+- **Trải nghiệm xúc giác:** Tích hợp **Haptic Feedback** cho mỗi lần tương tác, làm cho ứng dụng trở nên "thật" hơn dưới ngón tay.
+- **Tốc độ & Mượt mà:** Nhờ cơ chế **Offline-first**, dữ liệu được lưu trữ thông minh giúp việc chuyển trang gần như tức thì.
 
 ---
 
-## ✨ Tính năng nổi bật / Key Features
+## 🚀 Công nghệ sử dụng (Tech Stack)
 
-| Feature | Mô tả |
-|:---|:---|
-| 🎬 **Dark Cinematic UI** | Giao diện tối huyền bí, tập trung vào hình ảnh phim |
-| 🎨 **Dynamic Color Theme** | Palette API tự trích xuất màu từ poster để đổi màu nền động |
-| 🔄 **Shared Element Transition** | Hiệu ứng poster "bay" mượt mà từ danh sách → chi tiết phim |
-| 🔍 **Real-time Search** | Tìm kiếm với Debounce + Paging 3, không bị giật lag |
-| 🎞️ **Video Player** | Xem phim và Trailer trong app (WebView + Media3/ExoPlayer) |
-| 💾 **Offline First** | Xem lại yêu thích & lịch sử kể cả khi mất mạng (Room Cache) |
-| 🔐 **Secure Auth** | Đăng nhập/Đăng ký qua Supabase Auth với Row Level Security |
-| ✨ **Lottie Animations** | Hiệu ứng loading, empty state và favorite button sinh động |
-| 📡 **Real-time Ratings** | Đánh giá/nhận xét phim đồng bộ real-time qua Supabase |
-| 🎭 **Cast Details** | Xem thông tin diễn viên và filmography đầy đủ |
+Dự án được triển khai với bộ công nghệ "chuẩn mực" của giới Android Developer hiện nay:
 
----
+### 🎨 UI & UX
+- **Jetpack Compose:** 100% Declarative UI giúp giao diện linh hoạt và hiện đại.
+- **Glassmorphism Design:** Tận dụng Brush, Blur và Shaders để tạo hiệu ứng kính cao cấp.
+- **Lottie Animations:** Các trạng thái Empty, Error và Like button đều được thổi hồn bởi chuyển động vector.
+- **Coil:** Thư viện load ảnh tối ưu, xử lý mượt mà hàng trăm poster phim.
 
-## 🛠️ Tech Stack
+### ⚙️ Core Logic
+- **Clean Architecture + MVVM:** Đảm bảo mã nguồn dễ bảo trì, mở rộng và test.
+- **Kotlin Coroutines & Flow:** Xử lý bất đồng bộ mạnh mẽ, đảm bảo UI không bao giờ giật lag.
+- **Dagger Hilt:** Dependency Injection giúp quản lý các thành phần hệ thống gọn gàng.
 
-```
-📱 UI / Presentation
-├── Jetpack Compose      — Declarative UI framework
-├── Material Design 3   — Design system
-├── Coil                — Async image loading
-├── Lottie              — JSON-based animations
-└── Palette API         — Dynamic color extraction
-
-⚙️ Architecture & Logic
-├── MVVM + Clean Arch   — Separation of concerns
-├── Kotlin Coroutines   — Async programming
-├── Flow / StateFlow    — Reactive data streams
-└── Dagger Hilt         — Dependency injection
-
-🌐 Network
-├── Retrofit + OkHttp   — REST API client (TMDb)
-└── Kotlinx Serialization — JSON parsing
-
-💾 Storage & Backend
-├── Room Database       — Local persistence (offline-first)
-├── DataStore           — User preferences
-├── Supabase Auth       — Authentication
-├── Supabase Postgrest  — Cloud database (Watchlist, Ratings)
-└── Supabase Realtime   — Live data updates
-
-🎥 Media
-├── Media3 / ExoPlayer  — Video playback
-└── WebView             — Embedded movie streaming
-
-📄 Other
-├── Paging 3            — Paginated list loading
-├── Navigation Compose  — Type-safe navigation + Deep Links
-└── Row Level Security  — Database-level security (Supabase)
-```
+### ☁️ Backend & Storage
+- **Supabase:** Giải pháp Backend-as-a-Service (BaaS) cho Authentication và đồng bộ dữ liệu Realtime.
+- **Room Database:** Hệ thống cache local mạnh mẽ, hỗ trợ xem lại danh sách yêu thích ngay cả khi không có mạng.
+- **TMDB API & VidSrc Integration:** Nguồn dữ liệu phim khổng lồ kết hợp với trình phát video ổn định.
+- **Paging 3:** Cơ chế lazy loading giúp lướt danh sách phim dài vô tận mà không tốn tài nguyên.
 
 ---
 
-## 🔐 Bảo mật / Security
+## ✨ Tính năng nổi bật
 
-Ứng dụng triển khai **Row Level Security (RLS)** trực tiếp trên Supabase — đảm bảo dữ liệu của mỗi người dùng được bảo vệ ở tầng **server**, không phụ thuộc vào logic phía client:
-
-```sql
--- Mỗi người dùng chỉ thấy dữ liệu của chính mình
-CREATE POLICY "favorites_select_policy"
-ON favorites FOR SELECT
-USING (auth.uid() = user_id);
-```
-
-> Ngay cả khi API key bị lộ, kẻ tấn công **không thể** đọc dữ liệu của người dùng khác.
+- [x] **Cinematic Splash Screen:** Mở đầu ấn tượng với hiệu ứng dãn chữ và tỏa sáng mờ ảo.
+- [x] **Smart Search:** Tìm kiếm phim thông minh với gợi ý theo thời gian thực.
+- [x] **Personalized Stats:** Hệ thống đếm phim đã xem và phút xem với hiệu ứng số nhảy sinh động.
+- [x] **Cross-device Sync:** Lưu phim yêu thích và lịch sử xem đồng bộ qua tài khoản Supabase.
+- [x] **Haptic Interactions:** Cảm nhận từng cú chạm với phản hồi rung tương tác sâu.
 
 ---
 
-## 🚀 Hướng dẫn cài đặt / Setup
-
-### Yêu cầu / Requirements
-- Android Studio Ladybug (2024.2.1) hoặc mới hơn
-- JDK 17+
-- Android SDK 26+
-
-### Các bước / Steps
-
-1. **Clone repository:**
-   ```bash
-   git clone https://github.com/dungcodedao/PhimHay.git
-   cd PhimHay
-   ```
-
-2. **Cấu hình API Keys:**
-
-   Tạo file `local.properties` ở thư mục gốc và thêm:
-   ```properties
-   TMDB_API_KEY=your_tmdb_api_key_here
-   SUPABASE_URL=your_supabase_project_url
-   SUPABASE_ANON_KEY=your_supabase_anon_key
-   ```
-   - Lấy TMDb API key tại: [themoviedb.org](https://www.themoviedb.org/settings/api)
-   - Lấy Supabase credentials tại: [supabase.com](https://supabase.com/dashboard)
-
-3. **Build & Run:**
-   - Mở project trong Android Studio
-   - Sync Gradle → Nhấn **Run** ▶️
+## 📸 Hình ảnh dự án
+*(Bạn có thể chèn ảnh chụp màn hình ứng dụng tại đây để làm nổi bật thiết kế Dark Mode cao cấp)*
 
 ---
-
-## 📂 Cấu trúc dự án / Project Structure
-
-```
-app/src/main/java/com/example/movieapp/
-├── 📁 data/
-│   ├── local/          # Room Database, DAOs, Entities
-│   ├── remote/         # Retrofit API service, DTOs
-│   ├── repository/     # Repository implementations
-│   └── mapper/         # Data ↔ Domain model mapping
-├── 📁 domain/
-│   ├── model/          # Domain models (pure Kotlin)
-│   ├── repository/     # Repository interfaces
-│   └── usecase/        # Business logic use cases
-├── 📁 presentation/
-│   ├── components/     # Reusable Composables
-│   ├── navigation/     # NavGraph, Routes, Shared Transitions
-│   ├── pages/          # Screen Composables
-│   └── viewmodel/      # ViewModels & UI States
-└── 📁 di/              # Hilt dependency injection modules
-```
-
----
-
-## 📮 Liên hệ / Contact
-
-Developed with ❤️ by **Ngô Văn Dũng**
-
-[![GitHub](https://img.shields.io/badge/GitHub-dungcodedao-181717?style=flat-square&logo=github)](https://github.com/dungcodedao)
-
----
-
-*If you find this project interesting, please give it a ⭐ — it means a lot!*
-
-*Nếu bạn thấy dự án này thú vị, hãy tặng mình 1 ⭐ nhé!*
+*Dự án được phát triển với niềm đam mê dành cho điện ảnh và công nghệ Android hiện đại.*

@@ -12,7 +12,8 @@ data class Movie(
     val voteAverage: Double,
     val voteCount: Int,
     val releaseDate: String,
-    val genreIds: List<Int>
+    val genreIds: List<Int>,
+    val isTV: Boolean = false   // true = TV Series, false = Movie
 )
 
 data class MovieDetail(

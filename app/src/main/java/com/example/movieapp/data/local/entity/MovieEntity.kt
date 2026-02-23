@@ -19,7 +19,8 @@ data class MovieEntity(
     val voteAverage: Double,
     val voteCount: Int,
     val releaseDate: String,
-    val category: String, // "trending" hoặc "popular"
+    val category: String,
+    val isTV: Boolean = false,
     val cachedAt: Long = System.currentTimeMillis()
 )
 

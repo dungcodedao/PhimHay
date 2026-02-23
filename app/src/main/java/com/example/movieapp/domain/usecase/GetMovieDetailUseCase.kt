@@ -13,11 +13,19 @@ import javax.inject.Inject
 class GetMovieDetailUseCase @Inject constructor(
     private val repository: IMovieRepository
 ) {
-    fun getDetail(movieId: Int): Flow<Resource<MovieDetail>> = repository.getMovieDetail(movieId)
-    
-    fun getVideos(movieId: Int): Flow<Resource<List<MovieVideo>>> = repository.getMovieVideos(movieId)
-    
-    fun getCast(movieId: Int): Flow<Resource<List<Cast>>> = repository.getMovieCredits(movieId)
-    
-    fun getSimilar(movieId: Int): Flow<Resource<List<Movie>>> = repository.getSimilarMovies(movieId)
+    fun getDetail(movieId: Int, isTV: Boolean = false): Flow<Resource<MovieDetail>> =
+        if (isTV) repository.getTVDetail(movieId)
+        else repository.getMovieDetail(movieId)
+
+    fun getVideos(movieId: Int, isTV: Boolean = false): Flow<Resource<List<MovieVideo>>> =
+        if (isTV) repository.getTVVideos(movieId)
+        else repository.getMovieVideos(movieId)
+
+    fun getCast(movieId: Int, isTV: Boolean = false): Flow<Resource<List<Cast>>> =
+        if (isTV) repository.getTVCredits(movieId)
+        else repository.getMovieCredits(movieId)
+
+    fun getSimilar(movieId: Int, isTV: Boolean = false): Flow<Resource<List<Movie>>> =
+        if (isTV) repository.getSimilarTV(movieId)
+        else repository.getSimilarMovies(movieId)
 }

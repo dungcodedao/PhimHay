@@ -3,14 +3,17 @@ package com.example.movieapp.presentation.pages
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.blur
+import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -27,115 +30,147 @@ fun SplashScreen(
     viewModel: AuthViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsState()
+    val scope = rememberCoroutineScope()
 
-    // Animation scale cho logo
-    val scale = remember { Animatable(0.6f) }
-    val alpha = remember { Animatable(0f) }
-    // Glow pulse animation
-    val glowScale = remember { Animatable(1f) }
+    // ──────────────────────────────────────────────────
+    // ANIMATION STATES
+    // ──────────────────────────────────────────────────
+    val logoScale = remember { Animatable(0f) }
+    val logoAlpha = remember { Animatable(0f) }
+    val textAlpha = remember { Animatable(0f) }
+    val textOffset = remember { Animatable(40f) }
+    val letterSpacing = remember { Animatable(0f) }
+    val glowAlpha = remember { Animatable(0f) }
 
     LaunchedEffect(Unit) {
-        // Hiệu ứng xuất hiện
+        // 1. Logo pop up
         launch {
-            scale.animateTo(1f, animationSpec = spring(dampingRatio = Spring.DampingRatioMediumBouncy, stiffness = Spring.StiffnessLow))
+            logoScale.animateTo(1f, animationSpec = spring(dampingRatio = 0.5f, stiffness = Spring.StiffnessLow))
         }
         launch {
-            alpha.animateTo(1f, animationSpec = tween(600))
+            logoAlpha.animateTo(1f, animationSpec = tween(800))
         }
-        // Pulse glow liên tục
+        
+        // 2. Text slide up + fade in
+        delay(400)
         launch {
-            while (true) {
-                glowScale.animateTo(1.15f, animationSpec = tween(1000, easing = FastOutSlowInEasing))
-                glowScale.animateTo(1f, animationSpec = tween(1000, easing = FastOutSlowInEasing))
-            }
+            textAlpha.animateTo(1f, animationSpec = tween(1000))
         }
-        delay(2500)
+        launch {
+            textOffset.animateTo(0f, animationSpec = tween(1000, easing = FastOutSlowInEasing))
+        }
+        
+        // 3. Letter spacing expansion (Cinematic effect)
+        launch {
+            letterSpacing.animateTo(6f, animationSpec = tween(2000, easing = LinearOutSlowInEasing))
+        }
+
+        // 4. Background glow pulse
+        launch {
+            glowAlpha.animateTo(0.6f, animationSpec = tween(1500))
+        }
+
+        delay(2800)
         onSplashFinished(uiState.isLoggedIn)
     }
 
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(
-                Brush.radialGradient(
-                    colors = listOf(
-                        Color(0xFF1A0A3E),
-                        Color(0xFF0D0D0D)
-                    ),
-                    radius = 1000f
-                )
-            ),
+            .background(Color(0xFF030114)), // Deep cinematic black
         contentAlignment = Alignment.Center
     ) {
-        // Glow nền phía sau logo
+        // Decorative background glow
         Box(
             modifier = Modifier
-                .size(200.dp)
-                .scale(glowScale.value)
-                .background(
-                    Brush.radialGradient(
-                        colors = listOf(
-                            AccentPurple.copy(alpha = 0.35f),
-                            Color.Transparent
+                .size(400.dp)
+                .drawBehind {
+                    drawCircle(
+                        Brush.radialGradient(
+                            colors = listOf(AccentPurple.copy(glowAlpha.value * 0.4f), Color.Transparent),
+                            center = center
                         )
                     )
-                )
-                .blur(40.dp)
+                }
         )
 
         Column(
-            modifier = Modifier.scale(scale.value),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(12.dp)
+            verticalArrangement = Arrangement.Center
         ) {
-            // Icon logo chữ P
+            // Icon Logo
             Box(
                 modifier = Modifier
-                    .size(90.dp)
+                    .size(100.dp)
+                    .scale(logoScale.value)
+                    .drawBehind {
+                        // Vòng tròn sáng mờ phía sau
+                        drawCircle(
+                            Brush.sweepGradient(listOf(AccentPurple.copy(0.5f), AccentCyan.copy(0.5f), AccentPurple.copy(0.5f))),
+                            style = androidx.compose.ui.graphics.drawscope.Stroke(width = 4.dp.toPx())
+                        )
+                    }
+                    .padding(6.dp)
                     .background(
-                        Brush.linearGradient(
-                            colors = listOf(AccentPurple, AccentCyan)
-                        ),
-                        shape = androidx.compose.foundation.shape.RoundedCornerShape(24.dp)
+                        Brush.linearGradient(listOf(AccentPurple, AccentCyan)),
+                        RoundedCornerShape(28.dp)
                     ),
                 contentAlignment = Alignment.Center
             ) {
                 Text(
                     "▶",
-                    fontSize = 38.sp,
+                    fontSize = 42.sp,
                     color = Color.White,
-                    fontWeight = FontWeight.Bold
+                    modifier = Modifier.offset(x = 2.dp) // Căn chỉnh biểu tượng play
                 )
             }
 
-            Spacer(Modifier.height(8.dp))
+            Spacer(Modifier.height(32.dp))
 
+            // Brand Name
             Text(
                 text = "PhimHay",
-                fontSize = 42.sp,
-                fontWeight = FontWeight.ExtraBold,
+                fontSize = 48.sp,
+                fontWeight = FontWeight.Black,
                 color = Color.White,
-                letterSpacing = 2.sp
+                letterSpacing = letterSpacing.value.sp,
+                modifier = Modifier
+                    .graphicsLayer(
+                        alpha = textAlpha.value,
+                        translationY = textOffset.value
+                    )
             )
 
+            // Slogan
             Text(
-                text = "Thế giới điện ảnh trong tầm tay",
-                fontSize = 14.sp,
-                color = TextSecondary,
-                letterSpacing = 0.5.sp
+                text = "CINEMATIC EXPERIENCE",
+                fontSize = 12.sp,
+                fontWeight = FontWeight.Bold,
+                color = AccentCyan.copy(alpha = textAlpha.value),
+                letterSpacing = (letterSpacing.value * 0.5f).sp,
+                modifier = Modifier
+                    .graphicsLayer(
+                        alpha = textAlpha.value * 0.8f,
+                        translationY = textOffset.value * 0.5f
+                    )
             )
         }
 
-        // Loading indicator dưới cùng
+        // Loading bar at bottom
         Box(
             modifier = Modifier
+                .fillMaxWidth()
                 .align(Alignment.BottomCenter)
-                .padding(bottom = 60.dp)
+                .padding(bottom = 80.dp),
+            contentAlignment = Alignment.Center
         ) {
             LinearProgressIndicator(
-                modifier = Modifier.width(80.dp),
+                modifier = Modifier
+                    .width(120.dp)
+                    .height(2.dp)
+                    .graphicsLayer(alpha = textAlpha.value * 0.5f),
                 color = AccentPurple,
-                trackColor = AccentPurple.copy(alpha = 0.2f)
+                trackColor = Color.White.copy(0.1f)
             )
         }
     }

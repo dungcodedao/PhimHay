@@ -10,33 +10,35 @@ import com.example.movieapp.domain.model.*
  * Đảm bảo tính đóng gói và độc lập của Domain Layer.
  */
 
-// DTO → Domain
-fun MovieDto.toDomain(): Movie = Movie(
+// DTO → Domain  (tự động phát hiện TV series dựa trên name/firstAirDate)
+fun MovieDto.toDomain(isTV: Boolean = false): Movie = Movie(
     id = id,
-    title = title,
+    title = title ?: name ?: "",
     overview = overview,
     posterUrl = AppUtil.posterUrl(posterPath),
     backdropUrl = AppUtil.backdropUrl(backdropPath),
     voteAverage = voteAverage,
     voteCount = voteCount,
-    releaseDate = releaseDate,
-    genreIds = genreIds
+    releaseDate = releaseDate ?: firstAirDate ?: "",
+    genreIds = genreIds,
+    isTV = isTV
 )
 
-// DTO → Entity (để lưu cache)
+// DTO → Entity (để lưu cache, tự động nhận biết TV qua category name)
 fun MovieDto.toEntity(category: String): MovieEntity = MovieEntity(
     id = id,
-    title = title,
+    title = title ?: name ?: "",
     overview = overview,
-    posterPath = posterPath,
-    backdropPath = backdropPath,
+    posterPath = posterPath ?: "",
+    backdropPath = backdropPath ?: "",
     voteAverage = voteAverage,
     voteCount = voteCount,
-    releaseDate = releaseDate,
-    category = category
+    releaseDate = releaseDate ?: firstAirDate ?: "",
+    category = category,
+    isTV = category.contains("tv", ignoreCase = true)
 )
 
-// Entity → Domain (đọc từ cache)
+// Entity → Domain (đọc từ cache, phục hồi isTV flag)
 fun MovieEntity.toDomain(): Movie = Movie(
     id = id,
     title = title,
@@ -46,7 +48,8 @@ fun MovieEntity.toDomain(): Movie = Movie(
     voteAverage = voteAverage,
     voteCount = voteCount,
     releaseDate = releaseDate,
-    genreIds = emptyList()
+    genreIds = emptyList(),
+    isTV = isTV
 )
 
 fun FavoriteMovieEntity.toDomain(): Movie = Movie(
@@ -64,13 +67,13 @@ fun FavoriteMovieEntity.toDomain(): Movie = Movie(
 // Detail DTO → Domain
 fun MovieDetailDto.toDomain(): MovieDetail = MovieDetail(
     id = id,
-    title = title,
+    title = title ?: name ?: "",
     overview = overview,
     posterUrl = AppUtil.posterUrl(posterPath),
     backdropUrl = AppUtil.backdropUrl(backdropPath),
     voteAverage = voteAverage,
     voteCount = voteCount,
-    releaseDate = releaseDate,
+    releaseDate = releaseDate ?: firstAirDate ?: "",
     runtime = runtime,
     genres = genres.map { it.toDomain() },
     status = status,

@@ -11,7 +11,8 @@ import javax.inject.Inject
 
 data class HistoryUiState(
     val history: List<Movie> = emptyList(),
-    val isLoading: Boolean = false
+    val isLoading: Boolean = false,
+    val isRefreshing: Boolean = false
 )
 
 @HiltViewModel
@@ -40,6 +41,15 @@ class HistoryViewModel @Inject constructor(
     fun clearHistory() {
         viewModelScope.launch {
             repository.clearHistory()
+        }
+    }
+
+    fun refresh() {
+        viewModelScope.launch {
+            _uiState.update { it.copy(isRefreshing = true) }
+            repository.getWatchHistory().take(1).collect { list ->
+                _uiState.update { it.copy(history = list, isRefreshing = false) }
+            }
         }
     }
 }

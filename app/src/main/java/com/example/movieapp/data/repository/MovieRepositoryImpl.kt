@@ -10,6 +10,7 @@ import com.example.movieapp.data.local.dao.MovieDao
 import com.example.movieapp.data.mapper.*
 import com.example.movieapp.data.paging.MoviePagingSource
 import com.example.movieapp.data.remote.MovieApiService
+import com.example.movieapp.data.remote.dto.MovieListResponse
 import com.example.movieapp.domain.model.*
 import com.example.movieapp.domain.repository.IMovieRepository
 import com.example.movieapp.domain.util.Resource
@@ -31,49 +32,64 @@ class MovieRepositoryImpl @Inject constructor(
     private val preferenceManager: PreferenceManager
 ) : IMovieRepository {
 
-    override fun getTrendingMovies(): Flow<Resource<List<Movie>>> = flow {
+    override fun getTrendingMovies(): Flow<Resource<List<Movie>>> = fetchAndCache("trending") {
+        api.getTrendingMovies(apiKey = AppUtil.TMDB_API_KEY)
+    }
+
+    override fun getPopularMovies(page: Int): Flow<Resource<List<Movie>>> = fetchAndCache("popular") {
+        api.getPopularMovies(apiKey = AppUtil.TMDB_API_KEY, page = page)
+    }
+
+    override fun getTopRatedMovies(): Flow<Resource<List<Movie>>> = fetchAndCache("top_rated") {
+        api.getTopRatedMovies(apiKey = AppUtil.TMDB_API_KEY)
+    }
+
+    override fun getUpcomingMovies(): Flow<Resource<List<Movie>>> = fetchAndCache("upcoming") {
+        api.getUpcomingMovies(apiKey = AppUtil.TMDB_API_KEY)
+    }
+
+    override fun getNowPlayingMovies(): Flow<Resource<List<Movie>>> = fetchAndCache("now_playing") {
+        api.getNowPlayingMovies(apiKey = AppUtil.TMDB_API_KEY)
+    }
+
+    override fun getTrendingTV(): Flow<Resource<List<Movie>>> = fetchAndCache("tv_trending") {
+        api.getTrendingTV(apiKey = AppUtil.TMDB_API_KEY)
+    }
+
+    override fun getPopularTV(): Flow<Resource<List<Movie>>> = fetchAndCache("tv_popular") {
+        api.getPopularTV(apiKey = AppUtil.TMDB_API_KEY)
+    }
+
+    override fun getTopRatedTV(): Flow<Resource<List<Movie>>> = fetchAndCache("tv_top_rated") {
+        api.getTopRatedTV(apiKey = AppUtil.TMDB_API_KEY)
+    }
+
+    /**
+     * Helper function để thực hiện fetch API và lưu Cache vào DB.
+     * Dùng cho các danh sách phim trang chủ.
+     */
+    private fun fetchAndCache(
+        category: String,
+        fetcher: suspend () -> MovieListResponse
+    ): Flow<Resource<List<Movie>>> = flow {
         emit(Resource.Loading)
 
-        // Bắt đầu quan sát từ DB (SSOT)
-        val localData = movieDao.getMoviesByCategoryOnce("trending")
+        val localData = movieDao.getMoviesByCategoryOnce(category)
         if (localData.isNotEmpty()) {
             emit(Resource.Success(localData.map { it.toDomain() }))
         }
 
         try {
-            val response = api.getTrendingMovies(apiKey = AppUtil.TMDB_API_KEY)
-            val entities = response.results.map { it.toEntity("trending") }
-            movieDao.clearMoviesByCategory("trending")
+            val response = fetcher()
+            val entities = response.results.map { it.toEntity(category) }
+            movieDao.clearMoviesByCategory(category)
             movieDao.insertMovies(entities)
             
-            // Sau khi cập nhật DB, lấy lại dữ liệu mới nhất
-            val newData = movieDao.getMoviesByCategoryOnce("trending")
+            val newData = movieDao.getMoviesByCategoryOnce(category)
             emit(Resource.Success(newData.map { it.toDomain() }))
         } catch (e: Exception) {
             if (localData.isEmpty()) {
-                emit(Resource.Error(e.localizedMessage ?: "Lỗi tải phim từ máy chủ"))
-            }
-        }
-    }
-
-    override fun getPopularMovies(page: Int): Flow<Resource<List<Movie>>> = flow {
-        emit(Resource.Loading)
-        val localData = movieDao.getMoviesByCategoryOnce("popular")
-        if (localData.isNotEmpty() && page == 1) {
-            emit(Resource.Success(localData.map { it.toDomain() }))
-        }
-
-        try {
-            val response = api.getPopularMovies(apiKey = AppUtil.TMDB_API_KEY, page = page)
-            val entities = response.results.map { it.toEntity("popular") }
-            if (page == 1) movieDao.clearMoviesByCategory("popular")
-            movieDao.insertMovies(entities)
-            
-            val newData = movieDao.getMoviesByCategoryOnce("popular")
-            emit(Resource.Success(newData.map { it.toDomain() }))
-        } catch (e: Exception) {
-            if (localData.isEmpty() && page == 1) {
-                emit(Resource.Error(e.localizedMessage ?: "Lỗi kết nối mạng"))
+                emit(Resource.Error(e.localizedMessage ?: "Lỗi tải dữ liệu"))
             }
         }
     }
@@ -118,6 +134,50 @@ class MovieRepositoryImpl @Inject constructor(
             emit(Resource.Success(response.results.map { it.toDomain() }))
         } catch (e: Exception) {
             emit(Resource.Error(e.localizedMessage ?: "Lỗi tải phim tương tự"))
+        }
+    }
+
+    // ==================== TV SERIES DETAIL ====================
+    override fun getTVDetail(tvId: Int): Flow<Resource<MovieDetail>> = flow {
+        emit(Resource.Loading)
+        try {
+            val response = api.getTVDetail(tvId, AppUtil.TMDB_API_KEY)
+            emit(Resource.Success(response.toDomain()))
+        } catch (e: Exception) {
+            emit(Resource.Error(e.localizedMessage ?: "Lỗi tải chi tiết phim bộ"))
+        }
+    }
+
+    override fun getTVVideos(tvId: Int): Flow<Resource<List<MovieVideo>>> = flow {
+        emit(Resource.Loading)
+        try {
+            var response = api.getTVVideos(tvId, AppUtil.TMDB_API_KEY, "vi-VN")
+            if (response.results.isEmpty()) {
+                response = api.getTVVideos(tvId, AppUtil.TMDB_API_KEY, "en-US")
+            }
+            emit(Resource.Success(response.results.map { it.toDomain() }))
+        } catch (e: Exception) {
+            emit(Resource.Error(e.localizedMessage ?: "Lỗi tải video phim bộ"))
+        }
+    }
+
+    override fun getTVCredits(tvId: Int): Flow<Resource<List<Cast>>> = flow {
+        emit(Resource.Loading)
+        try {
+            val response = api.getTVCredits(tvId, AppUtil.TMDB_API_KEY)
+            emit(Resource.Success(response.cast.map { it.toDomain() }))
+        } catch (e: Exception) {
+            emit(Resource.Error(e.localizedMessage ?: "Lỗi tải diễn viên phim bộ"))
+        }
+    }
+
+    override fun getSimilarTV(tvId: Int): Flow<Resource<List<Movie>>> = flow {
+        emit(Resource.Loading)
+        try {
+            val response = api.getSimilarTV(tvId, AppUtil.TMDB_API_KEY)
+            emit(Resource.Success(response.results.map { it.toDomain(isTV = true) }))
+        } catch (e: Exception) {
+            emit(Resource.Error(e.localizedMessage ?: "Lỗi tải phim bộ tương tự"))
         }
     }
 

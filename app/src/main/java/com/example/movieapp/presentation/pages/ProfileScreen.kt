@@ -8,6 +8,8 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.rounded.Login
+import androidx.compose.material.icons.automirrored.rounded.Logout
 import androidx.compose.material.icons.rounded.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -28,6 +30,11 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.animation.animateContentSize
+import androidx.compose.animation.core.animateIntAsState
+import androidx.compose.animation.core.tween
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.platform.LocalHapticFeedback
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.movieapp.presentation.viewmodel.AuthViewModel
@@ -51,11 +58,13 @@ fun ProfileScreen(
     val favoriteState by favoriteViewModel.uiState.collectAsState()
     val historyState by historyViewModel.uiState.collectAsState()
     val context = LocalContext.current
+    val haptic = LocalHapticFeedback.current
 
     val imagePicker = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.GetContent()
     ) { uri ->
         uri?.let {
+            haptic.performHapticFeedback(HapticFeedbackType.LongPress)
             val inputStream = context.contentResolver.openInputStream(it)
             val bytes = inputStream?.readBytes()
             bytes?.let { b -> viewModel.uploadAvatar(b) }
@@ -197,27 +206,31 @@ fun ProfileScreen(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     ProfileStatItem(
-                        value = historyState.history.size.toString(),
+                        targetValue = historyState.history.size,
                         label = "ĐÃ XEM",
                         color = AccentCyan
                     )
                     Box(modifier = Modifier.width(1.dp).height(30.dp).background(Color.White.copy(0.1f)))
                     ProfileStatItem(
-                        value = favoriteState.favorites.size.toString(),
+                        targetValue = favoriteState.favorites.size,
                         label = "YÊU THÍCH",
                         color = ErrorRed
                     )
                     Box(modifier = Modifier.width(1.dp).height(30.dp).background(Color.White.copy(0.1f)))
                     ProfileStatItem(
-                        value = "1.2k",
+                        targetValue = 1200, // Giả lập 1.2k phút
                         label = "PHÚT XEM",
-                        color = AccentGold
+                        color = AccentGold,
+                        isKValue = true
                     )
                 }
             }
         } else {
             Button(
-                onClick = onNavigateLogin,
+                onClick = {
+                    haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                    onNavigateLogin()
+                },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 20.dp)
@@ -227,7 +240,7 @@ fun ProfileScreen(
                 colors = ButtonDefaults.buttonColors(containerColor = AccentPurple)
             ) {
                 Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    Icon(Icons.Rounded.Login, null)
+                    Icon(Icons.AutoMirrored.Rounded.Login, null)
                     Text("ĐĂNG NHẬP NGAY", fontWeight = FontWeight.ExtraBold, letterSpacing = 1.sp)
                 }
             }
@@ -306,13 +319,16 @@ fun ProfileScreen(
             if (uiState.isLoggedIn) {
                 MenuGroupCard {
                     ProfileMenuRow(
-                        icon = Icons.Rounded.Logout,
+                        icon = Icons.AutoMirrored.Rounded.Logout,
                         iconBg = ErrorRed.copy(0.15f),
                         iconTint = ErrorRed,
                         label = "Đăng xuất",
                         labelColor = ErrorRed,
                         showChevron = false,
-                        onClick = { viewModel.logout() }
+                        onClick = {
+                            haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                            viewModel.logout()
+                        }
                     )
                 }
             }
@@ -327,9 +343,27 @@ fun ProfileScreen(
 // ──────────────────────────────────────────────────
 
 @Composable
-private fun ProfileStatItem(value: String, label: String, color: Color) {
+private fun ProfileStatItem(targetValue: Int, label: String, color: Color, isKValue: Boolean = false) {
+    val animatedValue by animateIntAsState(
+        targetValue = targetValue,
+        animationSpec = tween(durationMillis = 1500),
+        label = "statAnimation"
+    )
+
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        Text(value, fontSize = 24.sp, fontWeight = FontWeight.ExtraBold, color = color)
+        val displayValue = if (isKValue) {
+            "${(animatedValue / 1000f).let { if (it >= 1) String.format("%.1fk", it) else animatedValue.toString() }}"
+        } else {
+            animatedValue.toString()
+        }
+        
+        Text(
+            text = displayValue,
+            fontSize = 24.sp,
+            fontWeight = FontWeight.ExtraBold,
+            color = color,
+            modifier = Modifier.animateContentSize()
+        )
         Text(label, fontSize = 11.sp, color = TextSecondary)
     }
 }
@@ -358,11 +392,16 @@ private fun ProfileMenuRow(
     trailing: @Composable (() -> Unit)? = null,
     onClick: () -> Unit = {}
 ) {
+    val haptic = LocalHapticFeedback.current
+    
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
             .fillMaxWidth()
-            .clickable(onClick = onClick)
+            .clickable {
+                haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                onClick()
+            }
             .padding(horizontal = 16.dp, vertical = 14.dp)
     ) {
         // Icon với nền tròn
