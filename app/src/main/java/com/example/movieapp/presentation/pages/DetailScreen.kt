@@ -1,7 +1,6 @@
 package com.example.movieapp.presentation.pages
 
 import android.content.Intent
-import android.net.Uri
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*

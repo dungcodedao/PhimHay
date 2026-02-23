@@ -1,6 +1,5 @@
 package com.example.movieapp.presentation.viewmodel
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.movieapp.domain.model.Movie
 import com.example.movieapp.domain.repository.IMovieRepository

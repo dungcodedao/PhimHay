@@ -1,6 +1,5 @@
 package com.example.movieapp.presentation.pages
 
-import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
