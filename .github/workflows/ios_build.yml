@@ -1,0 +1,48 @@
+name: Build iOS App
+
+on:
+  push:
+    branches: [ "master", "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'zulu'
+          cache: 'gradle'
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+
+      - name: Install Cocoapods
+        run: |
+          cd iosApp
+          pod install
+
+      - name: Build Framework
+        run: ./gradlew :composeApp:assembleDebugAppleFrameworkForXcode
+
+      - name: Build iOS App (Archive)
+        run: |
+          xcodebuild -workspace iosApp/iosApp.xcworkspace \
+                     -scheme iosApp \
+                     -sdk iphoneos \
+                     -configuration Debug \
+                     -archivePath $PWD/build/iosApp.xcarchive \
+                     clean archive \
+                     CODE_SIGNING_ALLOWED=NO
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-archive
+          path: build/iosApp.xcarchive

@@ -12,19 +12,12 @@ local.properties
 # AI & Agent metadata
 .agent/
 
-# Logs and temporary build files
-*.log
-*.txt
-build_*.txt
-compile_*.log
-final_*.log
+# Logs folder
+logs/
 
-# Project Documentation & Plans (AI Generated)
-IMPLEMENTATION_PLAN.md
-ARCHITECTURE.md
-DEVELOPMENT_PROMPTS.md
-PROJECT_SUMMARY.md
+# Build artifacts
+composeApp/build/
+iosApp/build/
 
-# Other personal/binary files
-*.pdf
-local.properties
+# Kotlin Multiplatform
+.kotlin/
