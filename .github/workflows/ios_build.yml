@@ -23,17 +23,25 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
 
+      - name: List files for debug
+        run: ls -R
+
       - name: Install Cocoapods
         run: |
-          cd iosApp
-          pod install
+          if [ -f "iosApp/Podfile" ]; then
+            cd iosApp
+            pod install
+          else
+            echo "Error: Podfile not found in iosApp directory"
+            exit 1
+          fi
 
       - name: Build Framework
         run: ./gradlew :composeApp:assembleDebugAppleFrameworkForXcode
 
       - name: Build iOS App (Archive)
         run: |
-          xcodebuild -workspace iosApp/iosApp.xcworkspace \
+          xcodebuild -project iosApp/iosApp.xcodeproj \
                      -scheme iosApp \
                      -sdk iphoneos \
                      -configuration Debug \
