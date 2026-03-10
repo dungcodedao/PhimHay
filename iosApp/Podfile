@@ -2,7 +2,7 @@ platform :ios, '15.0'
 
 target 'iosApp' do
   use_frameworks!
-  
-  # Kết nối với module Kotlin
-  pod 'composeApp', :path => '../composeApp'
+
+  # Chỉ sử dụng các thư viện cần thiết, nếu chưa có podspec thì có thể bỏ qua bước này
+  # pod 'composeApp', :path => '../composeApp'
 end
