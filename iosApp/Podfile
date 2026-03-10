@@ -1,0 +1,8 @@
+platform :ios, '15.0'
+
+target 'iosApp' do
+  use_frameworks!
+  
+  # Kết nối với module Kotlin
+  pod 'composeApp', :path => '../composeApp'
+end

@@ -39,10 +39,18 @@ jobs:
                      -configuration Debug \
                      -archivePath $PWD/build/iosApp.xcarchive \
                      clean archive \
-                     CODE_SIGNING_ALLOWED=NO
+                     CODE_SIGNING_ALLOWED=NO \
+                     CODE_SIGNING_REQUIRED=NO
 
-      - name: Upload Artifact
+      - name: Prepare App for Sideloadly
+        run: |
+          mkdir -p build/Payload
+          cp -r build/iosApp.xcarchive/Products/Applications/iosApp.app build/Payload/
+          cd build
+          zip -r PhimHay.ipa Payload
+
+      - name: Upload IPA Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ios-archive
-          path: build/iosApp.xcarchive
+          name: PhimHay-iOS-IPA
+          path: build/PhimHay.ipa
